@@ -1,0 +1,41 @@
+---
+import Base from '@/layouts/Base.astro';
+import JpgToPdfTool from '@/components/tools/JpgToPdfTool.svelte';
+---
+
+<Base
+  title="JPG to PDF — Free, No Upload | PDF Toolkit"
+  description="Convert JPG, PNG, and WebP images to a single PDF document. No upload, no watermark, no limits. Works offline after first load."
+  canonical="/jpg-to-pdf"
+>
+  <h1 class="text-3xl font-bold text-slate-900 mb-2">JPG to PDF</h1>
+  <p class="text-slate-500 mb-8">
+    Convert one or more images (JPG, PNG, WebP) into a single PDF.
+    Each image becomes one page — drop multiple files to combine them.
+    Everything runs in your browser; no upload required.
+  </p>
+
+  <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+    <JpgToPdfTool client:visible />
+  </div>
+
+  <section class="mt-12 space-y-3 text-sm text-slate-600">
+    <h2 class="text-lg font-semibold text-slate-800">Frequently asked questions</h2>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Which image formats are supported?</summary>
+      <p class="px-4 pb-4 pt-2">JPG/JPEG, PNG, and WebP. Each image is embedded as one page in the output PDF at its original resolution.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Can I combine multiple images into one PDF?</summary>
+      <p class="px-4 pb-4 pt-2">Yes — select or drop multiple images and they'll be combined in the order listed. You can remove individual images before converting.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Are my images uploaded?</summary>
+      <p class="px-4 pb-4 pt-2">No. All processing happens locally in your browser. Your images never leave your device.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Will the PDF be the same size as the images?</summary>
+      <p class="px-4 pb-4 pt-2">The output PDF embeds the original image data — so a 2 MB JPG will produce roughly a 2 MB PDF page. Use the <a href="/compress-pdf" class="text-sky-600 hover:underline">Compress PDF</a> tool afterwards if you need to reduce the file size.</p>
+    </details>
+  </section>
+</Base>

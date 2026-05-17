@@ -1,5 +1,6 @@
 import * as Comlink from 'comlink';
 import { PDFDocument, PDFName, PDFRawStream, degrees } from 'pdf-lib';
+import { PDFDocument as CantoPDFDocument } from '@cantoo/pdf-lib';
 import * as pdfjs from 'pdfjs-dist';
 import { zipSync } from 'fflate';
 import * as opfs from '@/lib/opfs';
@@ -17,7 +18,9 @@ const uuid = () => crypto.randomUUID();
 
 const api: PdfApi = {
   async stage(file: File): Promise<Handle> {
-    const name = `${uuid()}.bin`;
+    const ext = file.name.split('.').pop()?.toLowerCase() ?? 'bin';
+    const safeExt = ['pdf', 'jpg', 'jpeg', 'png', 'webp'].includes(ext) ? ext : 'bin';
+    const name = `${uuid()}.${safeExt}`;
     await opfs.writeStream(name, file.stream());
     return name;
   },
@@ -223,6 +226,66 @@ const api: PdfApi = {
         fellBackToGs,
       },
     };
+  },
+
+  async imagesToPdf(handles: Handle[], onProgress: ProgressFn): Promise<Handle> {
+    const doc = await PDFDocument.create();
+    for (let i = 0; i < handles.length; i++) {
+      const f = await opfs.readFile(handles[i]);
+      const bytes = new Uint8Array(await f.arrayBuffer());
+      const mime = handles[i].endsWith('.png') ? 'png' : 'jpeg';
+      let img;
+      try {
+        img = mime === 'png'
+          ? await doc.embedPng(bytes)
+          : await doc.embedJpg(bytes);
+      } catch {
+        // Try the other format if detection fails
+        try { img = await doc.embedJpg(bytes); } catch { img = await doc.embedPng(bytes); }
+      }
+      const page = doc.addPage([img.width, img.height]);
+      page.drawImage(img, { x: 0, y: 0, width: img.width, height: img.height });
+      onProgress(i + 1, handles.length, `Adding image ${i + 1} of ${handles.length}`);
+    }
+    const name = `${uuid()}.pdf`;
+    await opfs.writeBytes(name, await doc.save());
+    return name;
+  },
+
+  async pdfToImages(h: Handle, onProgress: ProgressFn): Promise<Handle> {
+    const f = await opfs.readFile(h);
+    const buf = await f.arrayBuffer();
+    const doc = await pdfjs.getDocument({ data: new Uint8Array(buf) }).promise;
+    const entries: Record<string, Uint8Array> = {};
+    for (let i = 1; i <= doc.numPages; i++) {
+      const page = await doc.getPage(i);
+      const vp = page.getViewport({ scale: 2 }); // 2x = ~144dpi
+      const canvas = new OffscreenCanvas(Math.round(vp.width), Math.round(vp.height));
+      const ctx = canvas.getContext('2d')!;
+      await page.render({ canvasContext: ctx as unknown as CanvasRenderingContext2D, viewport: vp }).promise;
+      const blob = await canvas.convertToBlob({ type: 'image/jpeg', quality: 0.92 });
+      entries[`page-${String(i).padStart(3, '0')}.jpg`] = new Uint8Array(await blob.arrayBuffer());
+      onProgress(i, doc.numPages, `Exporting page ${i} of ${doc.numPages}`);
+    }
+    await doc.destroy();
+    const zipName = `${uuid()}.zip`;
+    await opfs.writeBytes(zipName, zipSync(entries));
+    return zipName;
+  },
+
+  async removePassword(h: Handle, password: string, onProgress: ProgressFn): Promise<Handle> {
+    const f = await opfs.readFile(h);
+    const bytes = new Uint8Array(await f.arrayBuffer());
+    onProgress(0, 1, 'Decrypting…');
+    const doc = await CantoPDFDocument.load(bytes, {
+      password,
+      ignoreEncryption: false,
+    });
+    onProgress(1, 1, 'Saving…');
+    const out = await doc.save();
+    const name = `${uuid()}.pdf`;
+    await opfs.writeBytes(name, new Uint8Array(out));
+    return name;
   },
 
   async getResultBlob(h: Handle): Promise<Blob> {

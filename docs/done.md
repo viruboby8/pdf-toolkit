@@ -32,6 +32,12 @@ Append a new entry at the end of every session you complete. Newest at the botto
   - Commit / PR: —
   - Next session should: Deploy on Railway, then start Phase 4 (JPG↔PDF, Tesseract.js OCR, password remove via @cantoo/pdf-lib).
 
+- **2026-05-17 — Phase 4: JPG↔PDF + OCR + Password Remove** (~2 hours)
+  - Shipped: `imagesToPdf()` worker method (embed JPG/PNG/WebP via pdf-lib, one page per image). `pdfToImages()` worker method (renders at 2× via pdfjs OffscreenCanvas, exports as JPEG zip). `removePassword()` worker method via `@cantoo/pdf-lib`. OCR via Tesseract.js lazy-loaded on main thread (avoids nested-worker complexity). 4 new tools + pages: `/jpg-to-pdf`, `/pdf-to-jpg`, `/ocr-pdf`, `/remove-password`. Header + homepage updated to 11 tools. Build clean: 19 routes.
+  - Notable: OCR runs on the main thread (Tesseract.js manages its own worker internally). Stage method now preserves file extension (jpg/png/pdf) so imagesToPdf can detect format. @cantoo/pdf-lib used only for removePassword — regular pdf-lib handles all other ops to keep bundles minimal.
+  - Commit / PR: —
+  - Next session should: Deploy on Railway, then Phase 5 (programmatic SEO — 60+ landing pages via Astro content collections).
+
 - **2026-05-17 — Infra: GitHub + Railway config** (~30 min)
   - Shipped: Public repo live at https://github.com/viruboby8/pdf-toolkit. `railway.json` (nixpacks build → `npx serve dist`). `public/serve.json` carries COOP/COEP + security headers for the `serve` static server (replaces Cloudflare `_headers` format). `start` script added to package.json. Deployment target changed from Cloudflare Pages to Railway.
   - Notable: `_headers` is Cloudflare-only format; Railway's `serve` reads `serve.json` instead — must keep both for portability. `npx serve dist --listen $PORT` uses Railway's injected `$PORT` env var.

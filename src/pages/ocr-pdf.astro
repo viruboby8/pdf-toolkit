@@ -1,0 +1,40 @@
+---
+import Base from '@/layouts/Base.astro';
+import OcrTool from '@/components/tools/OcrTool.svelte';
+---
+
+<Base
+  title="PDF OCR — Extract Text from Scanned PDF | PDF Toolkit"
+  description="Extract text from scanned PDFs using OCR. Runs entirely in your browser with Tesseract.js. No upload, no data sent to any server."
+  canonical="/ocr-pdf"
+>
+  <h1 class="text-3xl font-bold text-slate-900 mb-2">PDF OCR — Extract text</h1>
+  <p class="text-slate-500 mb-8">
+    Extract text from scanned PDFs or image-based documents using Optical Character Recognition.
+    Powered by Tesseract.js — runs entirely in your browser. No upload, no server, no data leaves your device.
+  </p>
+
+  <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+    <OcrTool client:visible />
+  </div>
+
+  <section class="mt-12 space-y-3 text-sm text-slate-600">
+    <h2 class="text-lg font-semibold text-slate-800">Frequently asked questions</h2>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">What is OCR?</summary>
+      <p class="px-4 pb-4 pt-2">OCR (Optical Character Recognition) reads text from images. A scanned PDF is essentially an image — OCR lets you extract and copy the text it contains, even though it wasn't originally machine-readable.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">How accurate is the OCR?</summary>
+      <p class="px-4 pb-4 pt-2">Tesseract.js achieves 95–99% accuracy on clean printed text at reasonable scan quality (200+ DPI). Handwritten text, low-contrast scans, or unusual fonts will reduce accuracy.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Why does it take a moment to start?</summary>
+      <p class="px-4 pb-4 pt-2">The OCR engine (~10 MB language model) is downloaded from a CDN on first use and cached by your browser. Subsequent uses on the same device are instant.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">My PDF already has selectable text — do I need OCR?</summary>
+      <p class="px-4 pb-4 pt-2">No. If you can already highlight and copy text in your PDF viewer, the text layer exists. OCR is only needed for image-based scanned documents where text is not selectable.</p>
+    </details>
+  </section>
+</Base>

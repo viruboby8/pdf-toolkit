@@ -15,6 +15,9 @@ export interface PdfApi {
   deletePages(h: Handle, pages: number[], onProgress: ProgressFn): Promise<Handle>;
   extractPages(h: Handle, pages: number[], onProgress: ProgressFn): Promise<Handle>;
   compress(h: Handle, opts: CompressOpts, onProgress: ProgressFn): Promise<CompressResponse>;
+  imagesToPdf(handles: Handle[], onProgress: ProgressFn): Promise<Handle>;
+  pdfToImages(h: Handle, onProgress: ProgressFn): Promise<Handle>;
+  removePassword(h: Handle, password: string, onProgress: ProgressFn): Promise<Handle>;
   getResultBlob(h: Handle): Promise<Blob>;
   cleanup(h: Handle): Promise<void>;
   cleanupAll(): Promise<void>;

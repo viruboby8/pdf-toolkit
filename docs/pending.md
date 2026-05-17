@@ -3,10 +3,10 @@
 Move items to `done.md` as they complete.
 
 ## Current phase
-**Phase 4: JPG↔PDF + OCR + Passwords** — see `phases/phase-04-jpg-ocr-passwords.md`
+**Phase 5: Programmatic SEO scale-up** — see `phases/phase-05-seo-scale.md`
 
 ## Upcoming phases
-- Phase 5: SEO scale — `phases/phase-05-seo-scale.md`
+- Phase 6: Launch (TWA + AdSense) — `phases/phase-06-launch-twa-adsense.md`
 - Phase 5: SEO scale — `phases/phase-05-seo-scale.md`
 - Phase 6: Launch (TWA + AdSense) — `phases/phase-06-launch-twa-adsense.md`
 

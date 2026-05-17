@@ -1,0 +1,37 @@
+---
+import Base from '@/layouts/Base.astro';
+import PdfToJpgTool from '@/components/tools/PdfToJpgTool.svelte';
+---
+
+<Base
+  title="PDF to JPG — Free, No Upload | PDF Toolkit"
+  description="Convert every page of a PDF to a JPG image. Downloads as a ZIP. No upload, no watermark, no limits."
+  canonical="/pdf-to-jpg"
+>
+  <h1 class="text-3xl font-bold text-slate-900 mb-2">PDF to JPG</h1>
+  <p class="text-slate-500 mb-8">
+    Export every page of your PDF as a high-quality JPG image.
+    Pages are rendered at 2× resolution and packed into a ZIP for download.
+    No upload, no signup, no watermark.
+  </p>
+
+  <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+    <PdfToJpgTool client:visible />
+  </div>
+
+  <section class="mt-12 space-y-3 text-sm text-slate-600">
+    <h2 class="text-lg font-semibold text-slate-800">Frequently asked questions</h2>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">What resolution are the exported images?</summary>
+      <p class="px-4 pb-4 pt-2">Pages are rendered at 2× scale — a standard A4 PDF page (595 × 842 pt) becomes a 1190 × 1684 px JPG, roughly equivalent to 144 DPI. This is sharp enough for most document sharing and screen use.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">How do I get the images?</summary>
+      <p class="px-4 pb-4 pt-2">The tool downloads a ZIP file containing one JPG per page, named page-001.jpg, page-002.jpg, etc.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Are my files uploaded?</summary>
+      <p class="px-4 pb-4 pt-2">No. All rendering happens locally in your browser using Mozilla's PDF.js. Nothing is sent to a server.</p>
+    </details>
+  </section>
+</Base>
