@@ -13,13 +13,16 @@ Every major PDF tool (SmallPDF, iLovePDF) uploads your files to a server. That's
 
 No daily limits. No watermarks. No paywalls.
 
-## Features (Phase 1)
+## Features
 
 - **Merge PDFs** — drag to reorder, then combine
 - **Split PDF** — every N pages or a specific page range
 - **Rotate PDF** — 90°, 180°, or 270° applied to all pages
+- **Reorder pages** — drag page thumbnails to any order
+- **Delete pages** — click thumbnails to select and remove
+- **Extract pages** — pick specific pages and save as a new PDF
 
-Coming soon: page reorder/delete/extract, compression with India size presets (100/200/500 KB), JPG↔PDF, OCR, password handling.
+Coming soon: compression with India size presets (100/200/500 KB), JPG↔PDF, OCR, password handling.
 
 ## Architecture
 

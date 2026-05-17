@@ -3,15 +3,15 @@
 Running memory that survives between coding sessions. **Update at the end of every session** — the next session's agent reads this before touching code.
 
 ## Deployment
-- Cloudflare Pages project name: —
-- Production URL: —
-- Preview / branch URL pattern: —
-- Custom domain: —
+- Cloudflare Pages project name: — (pending connection)
+- Production URL: — (pending connection)
+- Preview / branch URL pattern: — (pending connection)
+- Custom domain: — (pending)
 - DNS provider: —
 
 ## Accounts & external services
-- GitHub repo URL: —
-- AdSense account / status: —
+- GitHub repo URL: https://github.com/viruboby8/pdf-toolkit
+- AdSense account / status: — (apply after Cloudflare deploy)
 - AdMob app ID: —
 - Analytics tool + URL/instance: —
 - Play Console listing URL: —
@@ -27,9 +27,10 @@ None set yet. (When set, list KEY name only — never the value.)
 - **TypeScript 5.7 pinned** — v6 (default from scaffold) incompatible with `@astrojs/svelte@7`.
 - **`@vite-pwa/astro` imported as default** — `import pwa from '@vite-pwa/astro'`, not `{ VitePWA }`.
 - **Tailwind via `@tailwindcss/vite`** — the scaffold used the modern Vite plugin approach (Tailwind 4) instead of `@astrojs/tailwind`. Works fine, kept as-is.
+- **Svelte prop shorthand `{onfiles}` fails SSR** — when a Svelte prop name (lowercase `onfiles`) differs from the function variable name (camelCase `onFiles`), Astro SSR can't resolve the shorthand at pre-render time. Must use explicit `onfiles={onFiles}`. Affected all three new Phase 2 tool components; fixed.
 
 ## Open questions / unresolved
-- GitHub repo URL and Cloudflare Pages URL not yet set (pending push/deploy).
+- Connect GitHub repo to Cloudflare Pages (build: `npm run build`, output: `dist/`).
 
 ## Useful links
 - Research: `research.md`

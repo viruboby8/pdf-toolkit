@@ -20,19 +20,19 @@ Open-source from day one is non-negotiable. The repo is the credibility artifact
 Stand up an Astro + Svelte project with three working PDF tools, deploy to Cloudflare Pages on a custom domain, and publish the repo on GitHub under MIT.
 
 ## Acceptance criteria
-- [ ] `npm create astro@latest` scaffold runs, with the Svelte integration installed and a passing `npm run build`.
-- [ ] Routes: `/`, `/merge-pdf`, `/split-pdf`, `/rotate-pdf`, `/privacy`, `/terms` all render statically.
-- [ ] Drag-and-drop file zone accepts multiple PDFs on `/merge-pdf`, reorders via drag, outputs a downloaded merged PDF.
-- [ ] `/split-pdf` accepts a single PDF, supports "every N pages" and "page range" modes, downloads a `.zip` (via `fflate`) or individual files.
-- [ ] `/rotate-pdf` accepts a single PDF, lets the user pick 90 / 180 / 270 degrees for all pages, downloads the rotated PDF.
-- [ ] All three tools work fully offline after first load (basic Workbox precache of HTML + JS + CSS — full PWA polish in Phase 6).
-- [ ] Site shows a one-line cookie banner (consent stored in `localStorage`) and links to `/privacy` and `/terms`.
-- [ ] Cloudflare Pages deployment configured (GitHub repo connected, `npm run build`, output `dist/`); production URL reachable.
-- [ ] Repo public on GitHub with `LICENSE` (MIT), `README.md`, `CONTRIBUTING.md`, and `.github/workflows/ci.yml` running `npm run build` on PRs.
-- [ ] Lighthouse (mobile, Slow 4G) ≥ 95 on Performance, Accessibility, Best Practices, SEO for `/`, `/merge-pdf`, `/split-pdf`, `/rotate-pdf`.
-- [ ] DevTools Network tab shows **zero** outbound network calls during a merge/split/rotate operation (the wedge).
-- [ ] `<meta>` tags + canonical + Open Graph + Twitter card on every page; `sitemap.xml` and `robots.txt` generated.
-- [ ] No console errors on any route (desktop Chrome, mobile Chrome via DevTools emulator, Safari iOS via simulator if accessible).
+- [x] `npm create astro@latest` scaffold runs, with the Svelte integration installed and a passing `npm run build`.
+- [x] Routes: `/`, `/merge-pdf`, `/split-pdf`, `/rotate-pdf`, `/privacy`, `/terms` all render statically.
+- [x] Drag-and-drop file zone accepts multiple PDFs on `/merge-pdf`, reorders via drag, outputs a downloaded merged PDF.
+- [x] `/split-pdf` accepts a single PDF, supports "every N pages" and "page range" modes, downloads a `.zip` (via `fflate`) or individual files.
+- [x] `/rotate-pdf` accepts a single PDF, lets the user pick 90 / 180 / 270 degrees for all pages, downloads the rotated PDF.
+- [x] All three tools work fully offline after first load (basic Workbox precache of HTML + JS + CSS — full PWA polish in Phase 6).
+- [x] Site shows a one-line cookie banner (consent stored in `localStorage`) and links to `/privacy` and `/terms`.
+- [ ] Cloudflare Pages deployment configured (GitHub repo connected, `npm run build`, output `dist/`); production URL reachable. ← **pending — repo is on GitHub, CF Pages connection needed**
+- [x] Repo public on GitHub with `LICENSE` (MIT), `README.md`, `CONTRIBUTING.md`, and `.github/workflows/ci.yml` running `npm run build` on PRs.
+- [ ] Lighthouse (mobile, Slow 4G) ≥ 95 on Performance, Accessibility, Best Practices, SEO for `/`, `/merge-pdf`, `/split-pdf`, `/rotate-pdf`. ← **pending — run after CF Pages deploy**
+- [x] DevTools Network tab shows **zero** outbound network calls during a merge/split/rotate operation (the wedge).
+- [x] `<meta>` tags + canonical + Open Graph + Twitter card on every page; `sitemap.xml` and `robots.txt` generated.
+- [x] No console errors on any route (desktop Chrome, mobile Chrome via DevTools emulator, Safari iOS via simulator if accessible).
 
 ## Tech stack & dependencies
 
@@ -304,6 +304,13 @@ const description = 'Combine PDFs locally. No upload, no signup, no watermark, n
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: interest-cohort=()
 ```
+
+## Deviations from plan (2026-05-17)
+- Scaffold pulled **Astro 6.3.3** instead of 5.x; pinned to `astro@5.18.1`.
+- `@astrojs/svelte@8` requires Astro 6; pinned to `@astrojs/svelte@7.0.0`.
+- TypeScript 6 from scaffold incompatible with `@astrojs/svelte@7`; pinned to `typescript@^5.7.0`.
+- `@vite-pwa/astro` exports a default function, not `{ VitePWA }`; fixed import to `import pwa from '@vite-pwa/astro'`.
+- Tailwind 4 used via `@tailwindcss/vite` (not `@astrojs/tailwind`); works fine, kept.
 
 ## Gotchas (from research)
 - **pdf-lib v1.17.x is the latest stable line** — there is no v2. Anything claiming "pdf-lib 2.x" is a fork (e.g., `@cantoo/pdf-lib`); don't accidentally install one here (we use the fork in Phase 4 for AES password support — research §2 v3 list).

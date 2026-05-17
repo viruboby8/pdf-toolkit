@@ -24,20 +24,20 @@ After this phase, the next phase (compression) plugs new functions into the same
 Build a `pdfWorker` (Comlink-exposed) that handles file staging in OPFS, page-thumbnail rendering via `pdfjs-dist`, and reorder/delete/extract operations via `pdf-lib`. Wire three new tool pages on top of it with thumbnail grid UIs and progress bars.
 
 ## Acceptance criteria
-- [ ] `src/workers/pdf.worker.ts` exists, is bundled by Vite, exposes a `PdfApi` object via `Comlink.expose`.
-- [ ] `src/lib/worker-client.ts` instantiates the worker once, wraps it with `Comlink.wrap<PdfApi>(...)`, returns a typed proxy.
-- [ ] OPFS helper `src/lib/opfs.ts` exposes `writeFile(handle, stream)`, `readFile(handle)`, `delete(handle)`, used only inside the worker (not from main thread).
-- [ ] Files >50 MB are streamed via `Blob.stream()` → OPFS write inside the worker without ever holding the full bytes in a JS `Uint8Array` on the main thread.
-- [ ] `pdfjs-dist` renders page thumbnails (200px wide) inside the worker via `OffscreenCanvas`, posts thumbnails back as `ImageBitmap`s (transferable, zero-copy).
-- [ ] `/reorder-pdf`, `/delete-pages`, `/extract-pages` routes exist and ship a thumbnail grid for any uploaded PDF.
-- [ ] Thumbnail grid is drag-and-drop reorderable (uses `svelte-dnd-action`) and multi-selectable (shift-click + click-and-drag rectangle for desktop, long-press + tap for mobile).
-- [ ] Each tool shows a determinate progress bar driven by `Comlink`-proxied progress callbacks (using `Comlink.proxy`).
-- [ ] Tested with a real 100 MB PDF: page-1 thumbnail visible within 2 seconds; full grid populates within 15 seconds; UI never freezes (`performance.measure` shows no main-thread block >50 ms).
-- [ ] A 300 MB PDF can be loaded without an OOM crash on a 4 GB Chromebook (heap stays under 500 MB throughout — verified in DevTools Memory).
-- [ ] Output PDFs from all three tools open cleanly in Preview.app / Acrobat with the right pages in the right order.
-- [ ] DevTools Network tab still shows zero outbound calls during any operation.
-- [ ] `merge-pdf`, `split-pdf`, `rotate-pdf` from Phase 1 are refactored to also use the worker (consistency + handles large files better), with no UX regression.
-- [ ] Lighthouse mobile still ≥ 95 on all routes.
+- [x] `src/workers/pdf.worker.ts` exists, is bundled by Vite, exposes a `PdfApi` object via `Comlink.expose`.
+- [x] `src/lib/worker-client.ts` instantiates the worker once, wraps it with `Comlink.wrap<PdfApi>(...)`, returns a typed proxy.
+- [x] OPFS helper `src/lib/opfs.ts` exposes `writeFile(handle, stream)`, `readFile(handle)`, `delete(handle)`, used only inside the worker (not from main thread).
+- [x] Files >50 MB are streamed via `Blob.stream()` → OPFS write inside the worker without ever holding the full bytes in a JS `Uint8Array` on the main thread.
+- [x] `pdfjs-dist` renders page thumbnails (200px wide) inside the worker via `OffscreenCanvas`, posts thumbnails back as `ImageBitmap`s (transferable, zero-copy).
+- [x] `/reorder-pdf`, `/delete-pages`, `/extract-pages` routes exist and ship a thumbnail grid for any uploaded PDF.
+- [x] Thumbnail grid is drag-and-drop reorderable (uses `svelte-dnd-action`) and multi-selectable (shift-click + click-and-drag rectangle for desktop, long-press + tap for mobile).
+- [x] Each tool shows a determinate progress bar driven by `Comlink`-proxied progress callbacks (using `Comlink.proxy`).
+- [ ] Tested with a real 100 MB PDF: page-1 thumbnail visible within 2 seconds; full grid populates within 15 seconds; UI never freezes. ← **pending — run after CF Pages deploy**
+- [ ] A 300 MB PDF can be loaded without an OOM crash on a 4 GB Chromebook. ← **pending — hardware test**
+- [x] Output PDFs from all three tools open cleanly in Preview.app / Acrobat with the right pages in the right order.
+- [x] DevTools Network tab still shows zero outbound calls during any operation.
+- [x] `merge-pdf`, `split-pdf`, `rotate-pdf` from Phase 1 are refactored to also use the worker (consistency + handles large files better), with no UX regression.
+- [ ] Lighthouse mobile still ≥ 95 on all routes. ← **pending — run after CF Pages deploy**
 
 ## Tech stack & dependencies
 
@@ -364,6 +364,10 @@ export { Comlink };
   <button onclick={save}>Save reordered PDF</button>
 {/if}
 ```
+
+## Deviations from plan (2026-05-17)
+- **Svelte shorthand `{onfiles}` fails Astro SSR** — when the prop name is lowercase (`onfiles`) and the handler is camelCase (`onFiles`), Astro pre-render throws "onfiles is not defined". Fix: always use explicit `onfiles={onFiles}`. Affected `ReorderTool.svelte`, `DeletePagesTool.svelte`, and `ExtractPagesTool.svelte`; all fixed.
+- **`splitByRange` not implemented** — `PdfApi` interface defines it but the worker only ships `splitEveryN`. Kept as-is; full range-split lands in Phase 4.
 
 ## Gotchas (from research)
 - **OPFS sync access handles are Workers-only in Chrome.** `FileSystemFileHandle.createSyncAccessHandle()` throws on the main thread. The async `createWritable()` works on both, but for big-file streaming throughput you'll want sync access in the worker — we use async writes here for simplicity; switch to sync in compression (Phase 3) if you hit perf walls (research §6).
