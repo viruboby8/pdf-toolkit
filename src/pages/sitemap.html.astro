@@ -1,0 +1,76 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import { pageTitle } from '@/lib/seo';
+
+const landingEntries = (await getCollection('landing')).sort((a, b) => a.slug.localeCompare(b.slug));
+const blogPosts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const HUB_PAGES = [
+  { href: '/', title: 'Home' },
+  { href: '/merge-pdf', title: 'Merge PDF' },
+  { href: '/split-pdf', title: 'Split PDF' },
+  { href: '/rotate-pdf', title: 'Rotate PDF' },
+  { href: '/reorder-pdf', title: 'Reorder PDF Pages' },
+  { href: '/delete-pages', title: 'Delete PDF Pages' },
+  { href: '/extract-pages', title: 'Extract PDF Pages' },
+  { href: '/compress-pdf', title: 'Compress PDF' },
+  { href: '/compress-pdf-to-100kb', title: 'Compress PDF to 100 KB' },
+  { href: '/compress-pdf-to-200kb', title: 'Compress PDF to 200 KB' },
+  { href: '/compress-pdf-to-500kb', title: 'Compress PDF to 500 KB' },
+  { href: '/compress-pdf-to-1mb', title: 'Compress PDF to 1 MB' },
+  { href: '/compress-pdf-to-2mb', title: 'Compress PDF to 2 MB' },
+  { href: '/jpg-to-pdf', title: 'JPG to PDF' },
+  { href: '/pdf-to-jpg', title: 'PDF to JPG' },
+  { href: '/ocr-pdf', title: 'OCR PDF' },
+  { href: '/remove-password', title: 'Remove PDF Password' },
+  { href: '/privacy', title: 'Privacy Policy' },
+  { href: '/terms', title: 'Terms of Service' },
+  { href: '/blog', title: 'Blog' },
+];
+
+const byTag: Record<string, typeof landingEntries> = {};
+for (const e of landingEntries) {
+  const tag = e.data.intentTag ?? 'other';
+  (byTag[tag] ??= []).push(e);
+}
+---
+
+<Base
+  title={pageTitle('Sitemap')}
+  description="Full sitemap of PDF Toolkit — all tools, landing pages, and blog posts."
+  canonical="/sitemap.html"
+>
+  <h1 class="text-3xl font-bold text-slate-900 mb-8">Sitemap</h1>
+
+  <section class="mb-8">
+    <h2 class="text-lg font-semibold text-slate-800 mb-3">Core pages</h2>
+    <ul class="space-y-1">
+      {HUB_PAGES.map(p => (
+        <li><a href={p.href} class="text-sky-700 hover:underline text-sm">{p.title}</a></li>
+      ))}
+    </ul>
+  </section>
+
+  {Object.entries(byTag).map(([tag, entries]) => (
+    <section class="mb-8">
+      <h2 class="text-lg font-semibold text-slate-800 mb-3 capitalize">{tag.replace(/-/g, ' ')} pages</h2>
+      <ul class="space-y-1">
+        {entries.map(e => (
+          <li><a href={`/${e.slug}`} class="text-sky-700 hover:underline text-sm">{e.data.h1}</a></li>
+        ))}
+      </ul>
+    </section>
+  ))}
+
+  {blogPosts.length > 0 && (
+    <section class="mb-8">
+      <h2 class="text-lg font-semibold text-slate-800 mb-3">Blog posts</h2>
+      <ul class="space-y-1">
+        {blogPosts.map(p => (
+          <li><a href={`/blog/${p.slug}`} class="text-sky-700 hover:underline text-sm">{p.data.title}</a></li>
+        ))}
+      </ul>
+    </section>
+  )}
+</Base>

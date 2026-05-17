@@ -1,0 +1,35 @@
+---
+h1: "Merge PDF — Unlimited Files, No Restrictions"
+metaTitle: "Merge PDF Unlimited Files — No Account, No Limit"
+metaDescription: "Merge as many PDF files as you need in one session. No 2-file or 5-file limit like Smallpdf or iLovePDF. Client-side, no upload, no account."
+tool: merge
+intentTag: quality
+relatedSlugs:
+  - "merge-pdf"
+  - "compress-pdf-no-upload"
+  - "compress-pdf-without-watermark"
+  - "split-pdf"
+faq:
+  - q: "Why do tools like Smallpdf limit the number of files on the free tier?"
+    a: "Server-side tools pay for compute and storage per operation. Limiting free users to two files per session is how they push users toward paid subscriptions. PDF Toolkit runs client-side, so there is no server cost per merge, and no reason to impose a limit."
+  - q: "How many files can I merge at once?"
+    a: "There is no hard limit. In practice, the constraint is your device's available RAM. A modern laptop with 8 GB RAM can comfortably merge 30-50 typical-sized PDFs in a single session. Very large PDFs (50+ MB each) will use more memory."
+  - q: "Can I reorder files before merging?"
+    a: "Yes. Files can be dragged into the correct sequence before the merge begins. The final PDF follows exactly the order you specify."
+  - q: "What is the maximum total file size?"
+    a: "The practical limit is approximately 300 MB total across all input files, depending on your device's RAM. For a typical set of 10-20 scanned certificate PDFs (each 1-5 MB), this is well within limits."
+  - q: "Do merged PDFs preserve bookmarks and hyperlinks?"
+    a: "Internal hyperlinks within each original PDF are preserved. Cross-document bookmarks are not automatically remapped, but any links pointing to external URLs remain functional."
+---
+
+Merge PDF Unlimited is a feature that sounds obvious but is surprisingly rare among free online tools. Smallpdf restricts free users to two files per merge. iLovePDF's free tier allows up to five. Both require you to either pay or wait until the next day to continue.
+
+The restriction exists because merging on a server has a cost. Storage, bandwidth, and compute time scale with usage, so it makes business sense to gate heavy use behind a paywall. PDF Toolkit sidesteps this entirely: because the merge runs inside your browser using WebAssembly, there is no server involved and therefore no per-operation cost that would justify a limit.
+
+The practical difference shows up in professional and administrative contexts. A lawyer assembling a court filing might need to merge a petition, twenty exhibits, a proof of service, and a cover sheet in a single submission. Doing this in Smallpdf's free tier would require twelve separate sessions across six days. In PDF Toolkit it is a single operation.
+
+Government tender submissions on the Government e-Marketplace (GeM) or state e-procurement portals often require all annexures, certificates, and financial documents combined into one PDF. A contractor with fifteen separate documents can assemble the entire package in one sitting.
+
+Many universities also require all admission documents — marksheets, gap certificate, caste certificate, domicile certificate, ID proof — as a single PDF. No-limit merging removes the artificial constraint that would otherwise force multiple sessions.
+
+Add files by clicking or dragging a batch from your file manager, drag to set the correct order, and download the merged result.

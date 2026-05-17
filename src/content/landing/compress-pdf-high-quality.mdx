@@ -1,0 +1,35 @@
+---
+h1: "Compress PDF Without Losing Quality"
+metaTitle: "Compress PDF Without Losing Quality — PDF Toolkit"
+metaDescription: "Compress PDF files while preserving text sharpness and image clarity. Binary-search JPEG quality finds the smallest file that still looks good."
+tool: compress
+intentTag: quality
+relatedSlugs:
+  - "compress-pdf-without-losing-quality"
+  - "compress-pdf"
+  - "compress-pdf-to-200kb"
+  - "compress-pdf-to-500kb"
+faq:
+  - q: "Does compressing a PDF degrade the text?"
+    a: "No. Vector text and fonts in a PDF are not re-encoded during compression — only embedded raster images (photos, scans) are recompressed. Text remains perfectly sharp at any zoom level."
+  - q: "How does the binary-search quality approach work?"
+    a: "The tool tries a JPEG quality setting, measures the resulting file size, then adjusts up or down — like a binary search — until it hits your target size. This avoids the common problem of over-compressing or under-compressing on the first pass."
+  - q: "When should I prioritise quality over file size?"
+    a: "Prioritise quality when the PDF contains scanned certificates, photo IDs, or medical images where fine detail matters. Prioritise size when uploading to a government portal with a strict KB limit and the examiner will be reading text, not zooming into photos."
+  - q: "Will a scanned Aadhaar card still be readable after compression?"
+    a: "Yes, in nearly all cases. The binary-search method keeps JPEG quality as high as possible while meeting your target size. A 2 MB scanned Aadhaar compressed to 200 KB remains fully legible."
+---
+
+Compress PDF Without Losing Quality is the challenge at the heart of most document workflows — shrinking a file enough to pass a portal's upload limit without making certificates illegible or photo IDs blurry.
+
+PDF files contain two fundamentally different types of content. Vector elements — typed text, fonts, drawn lines — are described mathematically and take up very little space. They are never degraded during compression because the compressor does not touch them. Raster elements — scanned pages, embedded photographs, screenshots — are stored as pixel grids and are where almost all file-size savings come from.
+
+PDF Toolkit compresses raster images using a binary-search algorithm over JPEG quality. Instead of applying a single quality level and hoping for the best, the tool iterates: encode at quality 80, check size, too large — try 70, still large — try 65, just right. The output uses the highest quality that still fits your target.
+
+In practice, a 4 MB scanned certificate compressed to 200 KB retains readable signatures, legible text, and identifiable photographs. Blocky JPEG artefacts only appear when the target size is extremely aggressive relative to the original content density.
+
+When quality matters most: scanned certificates submitted to universities or courts, photo ID pages in a passport application, and medical reports where small print must remain readable.
+
+When size matters more: preview thumbnails, draft submissions where a reviewer will request originals later, or when you know the portal displays documents at low resolution anyway.
+
+For text-only PDFs (bank statements, digital invoices), compression has minimal effect on quality — there are no raster images to re-encode — and file size reduction will also be modest.

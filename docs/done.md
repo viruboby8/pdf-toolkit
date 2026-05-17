@@ -43,3 +43,9 @@ Append a new entry at the end of every session you complete. Newest at the botto
   - Notable: `_headers` is Cloudflare-only format; Railway's `serve` reads `serve.json` instead — must keep both for portability. `npx serve dist --listen $PORT` uses Railway's injected `$PORT` env var.
   - Commit / PR: https://github.com/viruboby8/pdf-toolkit/commit/8f6118e
   - Next session should: Connect repo to Railway, verify deploy, then Phase 3.
+
+- **2026-05-17 — Phase 5: Programmatic SEO Scale-Up** (~3 hours)
+  - Shipped: Astro Content Collection (`landing` + `blog`) with Zod schema. `@astrojs/mdx` installed. 44 new landing pages via `[...slug].astro` dynamic route covering India-govt intents (UPSC, SSC, Railway, PAN, Aadhaar, college, visa, KYC, ITR, bank), JPG-to-PDF India flows, size variants (300KB, 3MB, 5MB, 10MB, 50MB), quality/offline modifiers, alternative-to comparison pages, and long-tail combos. Blog scaffold at `/blog/[slug].astro` + 3 seed posts. Human-readable sitemap at `/sitemap.html`. `JsonLd`, `FaqSchema`, `HowToSchema`, `Breadcrumbs`, `RelatedTools` SEO components. `ToolLoader.astro` switching all 11 tools. `Landing.astro` layout with SoftwareApplication + FAQPage + HowTo + BreadcrumbList JSON-LD per page. og:image + twitter:image added to Base.astro. Build clean: 68 routes, 68 URLs in sitemap-0.xml.
+  - Notable: `@astrojs/mdx@5.x` requires Astro 6 — must install `@astrojs/mdx@^4.0.0` (installs 4.3.14) for Astro 5 compatibility. YAML plain-scalar `: ` (colon-space) inside `a:` FAQ values causes js-yaml parse error — must quote affected strings. `astro-og-canvas` skipped (per-page OG images deferred); using icon-512.png as default OG image instead.
+  - Commit / PR: —
+  - Next session should: Deploy on Railway, submit sitemap to Google Search Console, then Phase 6 (TWA + AdSense).

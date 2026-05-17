@@ -1,0 +1,35 @@
+---
+h1: "Compress PDF — Preserve Text Quality"
+metaTitle: "Compress PDF and Preserve Text Quality — PDF Toolkit"
+metaDescription: "Learn how PDF compression really works: vector text is never degraded, only embedded images are re-encoded. Tips for getting the best result."
+tool: compress
+intentTag: quality
+relatedSlugs:
+  - "compress-pdf-high-quality"
+  - "compress-pdf"
+  - "compress-pdf-to-200kb"
+  - "compress-pdf-to-500kb"
+faq:
+  - q: "Why doesn't compressing a text-only PDF reduce its size much?"
+    a: "Text and fonts in PDFs are stored as vectors, already in a compact format. There are no raster images for the compressor to shrink, so the output is nearly identical in size. The savings come almost entirely from recompressing embedded photographs and scans."
+  - q: "What does JPEG re-encoding actually do to an image?"
+    a: "JPEG compression divides an image into 8×8 pixel blocks and discards fine detail that the human eye is less sensitive to. At high quality settings the difference is invisible; at very low settings you see blocky artefacts. The tool uses the highest quality level that still meets your target size."
+  - q: "Should I compress a PDF that is already under 500 KB?"
+    a: "Usually not. If it already meets your portal's limit, further compression only risks image quality without any practical benefit. Compress only when you need to meet a specific upload cap."
+  - q: "Does resolution change during compression?"
+    a: "No. PDF Toolkit does not downsample pixels (reduce resolution). It only adjusts JPEG quality on existing embedded images. The pixel dimensions of every image remain identical."
+  - q: "What if my compressed PDF is still too large?"
+    a: "Try a lower target size. If the file contains very large high-resolution scans, you may need to set an aggressive target. Alternatively, consider splitting the PDF and compressing each half separately."
+---
+
+Compress PDF and Preserve Text Quality requires understanding what "quality" actually means in a PDF — and that depends entirely on what the document contains.
+
+A PDF is not a single flat image. It is a container that can hold vector graphics, embedded fonts, typed text, and raster images all at once. Vector text is stored as mathematical descriptions of glyph outlines. When you compress a PDF, vector elements are left completely untouched — they cannot be "degraded" any more than a text file can be blurry. If your PDF is a digital invoice or a typed letter with no photographs, compressing it will barely change its size and will have zero effect on quality.
+
+Raster images are different. Scanned pages, photographs embedded in a document, and screenshots are stored as pixel grids — this is where compression has work to do. PDF Toolkit re-encodes these images using JPEG compression, finding the lowest quality level that still meets your target file size through iterative binary search.
+
+A critical insight: if a PDF is already small, do not compress it further. A 200 KB PDF compressed to 50 KB will likely show visible JPEG artefacts in photographs, though text remains unaffected.
+
+For scanned documents — produced by a smartphone scanner app or an office flatbed — the original scan quality matters. A scan at 300 DPI with good lighting compresses far more gracefully than a dim, low-resolution photo taken at an angle.
+
+The practical test: after compressing, zoom in to 150% in your PDF viewer and check that the text, signature, and any photograph look acceptable. If they do, the file is ready to upload.

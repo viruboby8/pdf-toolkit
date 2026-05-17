@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import Landing from '@/layouts/Landing.astro';
+import ToolLoader from '@/components/ToolLoader.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('landing');
+  return entries.map(entry => ({ params: { slug: entry.slug }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const { h1, metaTitle, metaDescription, tool, presetParam, faq, relatedSlugs } = entry.data;
+
+const breadcrumbs = [
+  { name: 'Home', href: '/' },
+  { name: h1, href: `/${entry.slug}` },
+];
+---
+
+<Landing
+  title={metaTitle}
+  description={metaDescription}
+  canonical={`/${entry.slug}`}
+  {h1}
+  {tool}
+  {faq}
+  {relatedSlugs}
+  {breadcrumbs}
+>
+  <div class="prose prose-slate max-w-none mb-6 text-slate-600 leading-relaxed">
+    <Content />
+  </div>
+
+  <ToolLoader {tool} {presetParam} />
+
+  <section class="mt-10 space-y-2">
+    <h2 class="text-xl font-semibold text-slate-800 mb-4">Frequently asked questions</h2>
+    {faq.map(({ q, a }) => (
+      <details class="border border-slate-200 rounded-lg group">
+        <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50 list-none flex justify-between items-center">
+          {q}
+          <span class="text-slate-400 group-open:rotate-180 transition-transform">▾</span>
+        </summary>
+        <p class="px-4 pb-4 pt-2 text-slate-600 text-sm">{a}</p>
+      </details>
+    ))}
+  </section>
+</Landing>

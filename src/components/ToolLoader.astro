@@ -1,0 +1,29 @@
+---
+import MergeTool from '@/components/tools/MergeTool.svelte';
+import SplitTool from '@/components/tools/SplitTool.svelte';
+import RotateTool from '@/components/tools/RotateTool.svelte';
+import ReorderTool from '@/components/tools/ReorderTool.svelte';
+import DeletePagesTool from '@/components/tools/DeletePagesTool.svelte';
+import ExtractPagesTool from '@/components/tools/ExtractPagesTool.svelte';
+import CompressTool from '@/components/tools/CompressTool.svelte';
+import JpgToPdfTool from '@/components/tools/JpgToPdfTool.svelte';
+import PdfToJpgTool from '@/components/tools/PdfToJpgTool.svelte';
+import OcrTool from '@/components/tools/OcrTool.svelte';
+import RemovePasswordTool from '@/components/tools/RemovePasswordTool.svelte';
+
+interface Props { tool: string; presetParam?: string }
+const { tool, presetParam } = Astro.props;
+---
+<div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm my-8">
+  {tool === 'merge'      && <MergeTool client:visible />}
+  {tool === 'split'      && <SplitTool client:visible />}
+  {tool === 'rotate'     && <RotateTool client:visible />}
+  {tool === 'reorder'    && <ReorderTool client:visible />}
+  {tool === 'delete'     && <DeletePagesTool client:visible />}
+  {tool === 'extract'    && <ExtractPagesTool client:visible />}
+  {tool === 'compress'   && <CompressTool client:visible presetTarget={presetParam ?? ''} />}
+  {tool === 'jpg-to-pdf' && <JpgToPdfTool client:visible />}
+  {tool === 'pdf-to-jpg' && <PdfToJpgTool client:visible />}
+  {tool === 'ocr'        && <OcrTool client:visible />}
+  {tool === 'unlock'     && <RemovePasswordTool client:visible />}
+</div>

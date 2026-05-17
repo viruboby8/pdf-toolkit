@@ -1,0 +1,38 @@
+---
+h1: "Compress PDF to 200 KB for SSC CGL / CHSL"
+metaTitle: "Compress PDF to 200 KB for SSC CGL CHSL — PDF Toolkit"
+metaDescription: "SSC CGL and CHSL require certificates under 200 KB on ssc.nic.in. Compress your PDF to exactly under 200 KB with binary-search precision."
+tool: compress
+presetParam: "200kb"
+intentTag: combination
+relatedSlugs:
+  - "compress-pdf-to-200kb"
+  - "compress-pdf-for-ssc"
+  - "compress-pdf-to-100kb"
+  - "compress-pdf-for-railway"
+faq:
+  - q: "What is the SSC CGL 2026 document upload size limit?"
+    a: "SSC CGL notifications specify that scanned certificates must be uploaded under 200 KB on ssc.nic.in. The signature image is separately required under 20-50 KB. Check the current year's official notification for the exact requirements, as limits occasionally change."
+  - q: "Why does SSC impose this size limit?"
+    a: "Government portals are built to handle millions of applications. Enforcing small file sizes reduces storage costs and ensures the portal remains performant during peak application windows. The limits are technical constraints, not arbitrary bureaucracy."
+  - q: "My certificate is a colour scan. Will it still be readable after compression to 200 KB?"
+    a: "Yes, in nearly all cases. A well-lit colour scan of a standard A4 certificate typically starts at 2-6 MB. Compressing to 200 KB reduces it to about 3-10% of the original, but text and signatures remain legible. Avoid using very dark or blurry source scans."
+  - q: "I compressed the certificate but forgot the signature PDF. What size must it be?"
+    a: "SSC typically requires the signature image as a JPG under 20-50 KB (check the specific notification), not always as a PDF. If uploading a signature PDF, it must typically be under 50 KB. The 200 KB limit applies to certificate PDFs."
+  - q: "Can I use this tool on the day of the SSC application deadline?"
+    a: "Yes. The tool is browser-based with no server queue. Because it runs locally, it does not slow down or go offline when traffic spikes during application deadlines — unlike some online tools that become unavailable under load."
+---
+
+Compress PDF to 200 KB for SSC CGL and CHSL is a task that trips up thousands of applicants every recruitment cycle. The ssc.nic.in portal enforces strict file size limits during the document upload phase, and applications with oversized files are rejected at the upload step without any partial save.
+
+The SSC CGL 2026 notification specifies that educational certificates, caste certificates, and ID proof documents must be uploaded as PDFs under 200 KB. The same requirement applies to SSC CHSL, SSC MTS, and SSC CPO applications. These limits are consistent across SSC examinations.
+
+The common workflow breakdown: applicants scan their 10th and 12th marksheets using CamScanner or Adobe Scan. These apps produce high-quality PDFs typically 2-5 MB per page. Without compression, every document is rejected by the portal.
+
+PDF Toolkit's binary-search compression handles this precisely. Rather than applying a fixed compression level and hoping the result falls under 200 KB, the tool iterates until the output is as close to 200 KB as possible without exceeding it. The process takes about five seconds per file.
+
+Step-by-step workflow: scan your certificate → open PDF Toolkit → select the 200 KB target → download → upload to ssc.nic.in.
+
+One detail that catches applicants off-guard: the signature and photograph have separate smaller limits. SSC typically requires the photograph as a JPEG under 50 KB and the signature under 20 KB — separate from certificate PDFs. Check the specific notification, as these numbers can change between recruitment cycles.
+
+Because PDF Toolkit runs in the browser, it remains accessible even when portal traffic spikes on deadline days.

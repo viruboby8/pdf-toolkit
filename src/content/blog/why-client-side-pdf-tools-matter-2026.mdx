@@ -1,0 +1,31 @@
+---
+title: "Why Client-Side PDF Tools Matter for Privacy in 2026"
+description: "When you upload a PDF to a free online tool, where does it go? An honest look at what server-side tools do with your files, and why in-browser PDF processing is the safer choice."
+pubDate: 2026-05-12
+targetSlug: "compress-pdf-no-upload"
+author: "PDF Toolkit"
+---
+
+Every week, millions of people upload their Aadhaar cards, salary slips, and bank statements to free online PDF compression sites. Most of these sites process files on their servers — which means your sensitive documents travel across the internet, sit on a server you do not control, and may be retained for hours or longer. In 2026, with deepfake-enabled identity fraud at record levels, this is a real risk.
+
+## What happens when you upload to a server-side PDF tool
+
+When you drag a file onto Smallpdf, ILovePDF, or similar services, your PDF is sent over HTTPS to their cloud infrastructure. The file is decrypted, processed, and re-encrypted for download. Most services say they delete files after 1–2 hours. Some retain processed files for longer to power their search or recommendation features.
+
+The practical risk is not that these companies are malicious — most are not. The risk is:
+
+- **Data breaches.** Cloud storage is a high-value target. A stored Aadhaar PDF is personally identifiable information under DPDP Act 2023.
+- **Government requests.** Servers have jurisdictions. A GDPR-compliant European company may still respond to a valid government request for data.
+- **Third-party sharing.** Free services often share analytics data. A PDF file name like `Aadhaar-Rahul-Sharma-12345.pdf` is metadata that can identify you even if the file content is not read.
+
+## How in-browser PDF processing works
+
+PDF Toolkit processes files entirely inside your browser using WebAssembly (WASM). WASM is a binary instruction format that runs near-native speed in Chrome, Firefox, and Safari without plugins. The JPEG compression engine (mozjpeg), the PDF manipulation library (pdf-lib), and the OCR engine (Tesseract.js) all run as WASM modules inside your browser tab.
+
+You can verify this in 30 seconds: open DevTools → Network tab → compress a PDF. You will see zero outbound requests to any server during processing. The only network activity is the initial page load.
+
+## When you should still use server-side tools
+
+Client-side tools have trade-offs. If you need PDF-to-Word conversion, that requires optical character recognition plus complex layout reconstruction — computationally expensive to run in a browser. E-sign workflows that require a trusted third-party signature authority must be server-side by design.
+
+For the common use cases — compress, merge, split, rotate, convert JPG to PDF, extract text — client-side is both faster and safer. Your file never leaves your device, there is no account to breach, and the tool works offline after the first visit.

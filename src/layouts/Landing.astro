@@ -1,0 +1,48 @@
+---
+import Base from '@/layouts/Base.astro';
+import Breadcrumbs from '@/components/seo/Breadcrumbs.astro';
+import RelatedTools from '@/components/seo/RelatedTools.astro';
+import FaqSchema from '@/components/seo/FaqSchema.astro';
+import HowToSchema from '@/components/seo/HowToSchema.astro';
+import JsonLd from '@/components/seo/JsonLd.astro';
+import { siteUrl } from '@/lib/seo';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  h1: string;
+  tool: string;
+  faq: { q: string; a: string }[];
+  relatedSlugs: string[];
+  breadcrumbs: { name: string; href: string }[];
+}
+
+const { title, description, canonical, h1, tool, faq, relatedSlugs, breadcrumbs } = Astro.props;
+
+const softwareApp = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'PDF Toolkit',
+  applicationCategory: 'UtilitiesApplication',
+  operatingSystem: 'Web',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  url: `${siteUrl}${canonical}`,
+  image: `${siteUrl}/icons/icon-512.png`,
+  description,
+};
+---
+
+<Base {title} {description} {canonical}>
+  <JsonLd data={softwareApp} />
+  <FaqSchema {faq} />
+  <HowToSchema {tool} name={h1} />
+
+  <Breadcrumbs crumbs={breadcrumbs} />
+
+  <h1 class="text-3xl font-bold text-slate-900 mb-4">{h1}</h1>
+
+  <slot />
+
+  <RelatedTools slugs={relatedSlugs} />
+</Base>

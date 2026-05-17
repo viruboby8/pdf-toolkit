@@ -1,0 +1,33 @@
+---
+h1: Compress PDF for KYC — Banks & Investment Platforms
+metaTitle: Compress PDF for KYC — Zerodha, Groww, Angel One
+metaDescription: Compress KYC documents to under 500 KB for Zerodha, Groww, Angel One, and CKYC portal uploads. Works for Aadhaar, PAN, address proof, and signature.
+tool: compress
+intentTag: india-govt
+relatedSlugs: ["compress-pdf-to-200kb","compress-pdf-to-500kb","jpg-to-pdf-for-kyc","compress-pdf-for-aadhaar"]
+faq:
+  - q: What is the file size limit for CKYC document uploads?
+    a: The Central KYC Registry (CKYC) operated by CERSAI caps each document upload at 500 KB. This applies to all financial intermediaries — brokers, mutual fund platforms, and banks — that submit KYC documents on behalf of customers. Individual fintech platforms like Zerodha, Groww, and Paytm Money typically also cap uploads at 500 KB or less within their own onboarding systems.
+  - q: Does Zerodha accept compressed PDFs for KYC?
+    a: Yes. Zerodha's KYC system accepts standard PDF files. The compression process does not alter the file's validity or the readability of document numbers and photos. Zerodha's DigiLocker integration can pull your Aadhaar details directly, which avoids file size issues entirely, but if you are uploading manually, keep each file under 500 KB.
+  - q: My scanned address proof for Groww is 2 MB. What is their limit?
+    a: Groww typically requires address proof documents under 5 MB, but in practice, their document processing pipeline works better with files under 500 KB. Large files can cause upload timeouts in the Groww app, especially on mobile networks. Compress to 200–300 KB for the most reliable upload experience.
+  - q: For bank account opening, what documents need to be compressed?
+    a: For bank KYC, you typically need to upload Aadhaar (front and back), PAN card, and sometimes an additional address proof. The Aadhaar PDF downloaded from UIDAI is usually fine at 100–200 KB, but if you are scanning a physical Aadhaar card, the scan can be 500 KB to 2 MB and will need compression.
+  - q: Can a compressed KYC document be rejected by SEBI-registered intermediaries?
+    a: No. Compression reduces file size without altering the document's content or metadata in any way that would affect regulatory acceptance. As long as the document is readable, valid, and matches the information you provided, it will be accepted. SEBI regulations govern what documents are accepted, not what file size they must be.
+---
+
+KYC document uploads for stockbrokers, mutual fund platforms, and bank account openings are gated behind file size limits that catch many users during onboarding. The Central KYC Registry (CKYC) caps uploads at 500 KB per document, and platforms like Zerodha, Groww, Angel One, and Paytm Money enforce similar limits within their own systems.
+
+The typical KYC document set includes Aadhaar card (front and back), PAN card, and sometimes a separate address proof or bank statement. The challenge varies by how you obtain these:
+
+- **E-Aadhaar PDF from UIDAI** — usually 100–200 KB, no compression needed
+- **Photographed Aadhaar card** converted to PDF — typically 500 KB to 2 MB
+- **Scanned PAN card** — 300 KB to 1 MB
+- **Bank statement** (for address proof) — 500 KB to 5 MB depending on statement length
+- **Signature image** converted to PDF — usually fine at under 100 KB
+
+The signature and photo requirements for Demat account opening add another dimension. Angel One and IIFL require a clear signature on white paper, photographed and uploaded as PDF or JPEG. A high-resolution phone photo at full quality can be 3–5 MB even for a simple signature scan. Compress it to under 200 KB.
+
+For mutual fund investments through platforms like MFU or Kuvera, the CKYC-linked process requires a single submission. Compress each document to under 400 KB before starting the KYC form to avoid having to restart the onboarding session if an upload fails partway through.

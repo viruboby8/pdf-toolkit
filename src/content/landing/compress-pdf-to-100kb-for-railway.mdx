@@ -1,0 +1,36 @@
+---
+h1: "Compress PDF to 100 KB for Railway RRB Exams"
+metaTitle: "Compress PDF to 100 KB for RRB NTPC Railway Exams"
+metaDescription: "RRB NTPC and Group D portals require ID and category certificate PDFs under 100 KB. Binary-search compression hits exactly under 100 KB every time."
+tool: compress
+presetParam: "100kb"
+intentTag: combination
+relatedSlugs:
+  - "compress-pdf-to-100kb"
+  - "compress-pdf-for-railway"
+  - "compress-pdf-to-200kb"
+  - "compress-pdf-for-ssc"
+faq:
+  - q: "Which RRB exams require documents under 100 KB?"
+    a: "RRB NTPC 2025, RRB Group D 2025, and RRB ALP (Assistant Loco Pilot) recruitment cycles have specified category certificates and ID proof PDFs under 100 KB on their respective RRB zone portals (rrbcdg.gov.in, rrbmumbai.gov.in, etc.). Check your specific RRB zone's notification."
+  - q: "Why is 100 KB such a strict limit?"
+    a: "Railway Recruitment Board portals process a very high volume of applications — RRB NTPC 2025 received over a crore applications. The 100 KB limit is a technical measure to manage storage and server load during the document upload phase."
+  - q: "My caste certificate is a 3 MB colour PDF. Can it realistically be compressed to 100 KB?"
+    a: "Yes. A 3 MB single-page scanned certificate contains a lot of redundant JPEG data. Compressing to 100 KB reduces it to about 3% of the original size. Text and official stamps will remain legible, though fine background patterns (security prints) may show artefacts."
+  - q: "What documents do RRB portals typically require at the 100 KB limit?"
+    a: "Caste/OBC/SC/ST certificate, disability certificate (if applicable), domicile certificate, and Aadhaar-based ID proof. The photograph and signature have separate and usually even stricter limits (20-50 KB each)."
+  - q: "Does the tool guarantee the output will be under 100 KB?"
+    a: "Yes. The binary-search algorithm will not stop until the output is confirmed to be below the target. If the content is extremely dense (very high-resolution multi-page scan), it will continue reducing quality until the target is met."
+---
+
+Compress PDF to 100 KB for Railway RRB Exams is one of the tightest upload requirements in Indian government recruitment, and it causes a significant number of application failures among candidates who do not account for it until the document upload screen.
+
+Railway Recruitment Board portals — rrbcdg.gov.in, rrbmumbai.gov.in, rrbsecunderabad.gov.in, and the other 19 RRB zone portals — enforce a 100 KB limit on category certificates and ID proof PDFs during the document upload stage of RRB NTPC 2025 and RRB Group D 2025 applications. This limit is among the strictest imposed by any central government recruitment body.
+
+Caste certificates, OBC non-creamy layer certificates, and disability certificates are typically multi-colour, multi-stamp official documents. When scanned at reasonable quality on a smartphone, they produce PDFs of 1-4 MB. Even scanner apps optimised for documents — CamScanner, Adobe Scan, Microsoft Lens — produce files well above 100 KB.
+
+Generic compression approaches fail here because they do not target a specific output size. A tool that "compresses by 60%" takes a 3 MB file to 1.2 MB — still twelve times the limit. PDF Toolkit's binary-search compression targets exactly 100 KB, iterating until the output qualifies.
+
+The compression does not touch vector text — only the embedded raster image. Typed text remains sharp. Official seals may show slight JPEG artefacts at extreme compression but remain identifiable for verification.
+
+After compressing, open the file in a PDF viewer at 100% zoom. If the issuing authority's seal, the candidate's name, and the certificate number are readable, the file is submission-ready.

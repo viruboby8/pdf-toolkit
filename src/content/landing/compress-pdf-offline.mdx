@@ -1,0 +1,35 @@
+---
+h1: "Compress PDF Offline — Works Without Internet"
+metaTitle: "Compress PDF Offline — No Internet Required"
+metaDescription: "PDF Toolkit works offline after first visit. The PWA caches the compression engine locally. Compress PDFs on trains, flights, or areas with poor connectivity."
+tool: compress
+intentTag: quality
+relatedSlugs:
+  - "compress-pdf-in-browser"
+  - "compress-pdf-no-upload"
+  - "compress-pdf"
+  - "merge-pdf-online-free-no-signup"
+faq:
+  - q: "How does the tool work offline if it is a website?"
+    a: "PDF Toolkit is a Progressive Web App (PWA). On your first visit, a service worker downloads and caches the application files and the WebAssembly binary. On subsequent visits — even without internet — the browser loads everything from its local cache."
+  - q: "Do I need to install the PWA to use it offline?"
+    a: "No. The service worker activates automatically on first visit. You can use the tool offline in the browser tab without pinning it to your home screen, though installing it as a PWA gives you quicker access."
+  - q: "How large is the cached data?"
+    a: "The WASM binary and app assets together are approximately 2-4 MB. This is cached once and reused for all future visits, including offline use."
+  - q: "Does offline mode work for merging PDFs too?"
+    a: "Yes. All tools in PDF Toolkit — compress, merge, split, rotate, and others — work offline after the first visit. The service worker caches the full application."
+  - q: "Will the offline version update automatically?"
+    a: "Yes. When you next visit the site with an internet connection, the service worker checks for updates and downloads newer versions in the background. The update takes effect on your next page load."
+---
+
+Compress PDF Offline is possible because PDF Toolkit is built as a Progressive Web App — a website that behaves like an installed application, including working when there is no network connection.
+
+The mechanism is a service worker: a script the browser registers on your first visit that intercepts future network requests. When the service worker is installed, it downloads and caches the application's HTML, CSS, JavaScript, and the WebAssembly binary that powers the compression engine. On any subsequent visit — online or offline — the browser serves the tool from its local cache rather than fetching it from the network.
+
+This benefits more than pure offline use. Even with a connection, the app loads faster on repeat visits because most assets come from cache. Slow or intermittent connections — mobile data in rural areas, congested Wi-Fi — do not affect performance once the cache is warm.
+
+Train journeys through areas with no signal — common on Indian Railways long-distance routes — are precisely when people have time to organise documents. A job applicant travelling to a city for an interview might need to compress a certificate PDF during the journey, with no internet access. PDF Toolkit handles this without any prior setup beyond a single earlier visit.
+
+Flights prohibit internet use or charge for it. If you realise before boarding that you need to compress a file for a meeting, a prior visit to PDF Toolkit is all the preparation needed.
+
+For privacy-conscious users, offline operation means no traffic whatsoever leaves the device — not even the app-loading requests a server-side tool would require.

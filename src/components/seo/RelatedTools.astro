@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props { slugs: string[] }
+const { slugs } = Astro.props;
+
+const HUB_TITLES: Record<string, string> = {
+  'merge-pdf': 'Merge PDF',
+  'split-pdf': 'Split PDF',
+  'rotate-pdf': 'Rotate PDF',
+  'reorder-pdf': 'Reorder PDF Pages',
+  'delete-pages': 'Delete PDF Pages',
+  'extract-pages': 'Extract PDF Pages',
+  'compress-pdf': 'Compress PDF',
+  'compress-pdf-to-100kb': 'Compress PDF to 100 KB',
+  'compress-pdf-to-200kb': 'Compress PDF to 200 KB',
+  'compress-pdf-to-500kb': 'Compress PDF to 500 KB',
+  'compress-pdf-to-1mb': 'Compress PDF to 1 MB',
+  'compress-pdf-to-2mb': 'Compress PDF to 2 MB',
+  'jpg-to-pdf': 'JPG to PDF',
+  'pdf-to-jpg': 'PDF to JPG',
+  'ocr-pdf': 'OCR PDF — Extract Text',
+  'remove-password': 'Remove PDF Password',
+};
+
+const allEntries = await getCollection('landing');
+const collectionTitles = Object.fromEntries(allEntries.map(e => [e.slug, e.data.h1]));
+const titleMap = { ...HUB_TITLES, ...collectionTitles };
+
+const links = slugs.filter(s => titleMap[s]).map(s => ({ slug: s, title: titleMap[s] }));
+---
+{links.length > 0 && (
+  <section class="mt-10 border-t border-slate-200 pt-6">
+    <h2 class="text-base font-semibold text-slate-700 mb-3">Related tools</h2>
+    <div class="flex flex-wrap gap-2">
+      {links.map(({ slug, title }) => (
+        <a href={`/${slug}`} class="px-3 py-1.5 text-sm bg-slate-100 hover:bg-sky-50 hover:text-sky-700 text-slate-700 rounded-lg border border-slate-200 transition-colors">
+          {title}
+        </a>
+      ))}
+    </div>
+  </section>
+)}

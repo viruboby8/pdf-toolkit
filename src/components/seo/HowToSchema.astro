@@ -1,0 +1,91 @@
+---
+import JsonLd from './JsonLd.astro';
+import { siteUrl } from '@/lib/seo';
+
+interface Props { tool: string; name: string }
+const { tool, name } = Astro.props;
+
+const STEPS: Record<string, Array<{ name: string; text: string }>> = {
+  merge: [
+    { name: 'Select your PDFs', text: 'Drop or click to select the PDF files you want to combine.' },
+    { name: 'Arrange order', text: 'Drag the files into the order you want them merged.' },
+    { name: 'Merge', text: 'Click the Merge PDF button. Processing runs locally in your browser.' },
+    { name: 'Download', text: 'Download the single combined PDF file.' },
+  ],
+  split: [
+    { name: 'Upload your PDF', text: 'Drop or select the PDF you want to split.' },
+    { name: 'Choose split mode', text: 'Select page ranges or split every page into a separate file.' },
+    { name: 'Split', text: 'Click Split PDF. Pages are extracted in your browser.' },
+    { name: 'Download', text: 'Download the resulting ZIP of PDF pages.' },
+  ],
+  rotate: [
+    { name: 'Upload your PDF', text: 'Drop or select the PDF with pages you want to rotate.' },
+    { name: 'Select pages', text: 'Choose which pages to rotate, or select all.' },
+    { name: 'Rotate', text: 'Click 90° CW, 90° CCW, or 180°. Preview updates instantly.' },
+    { name: 'Download', text: 'Download the corrected PDF.' },
+  ],
+  reorder: [
+    { name: 'Upload your PDF', text: 'Drop or select the PDF whose pages you want to rearrange.' },
+    { name: 'Drag pages', text: 'Drag page thumbnails into the order you need.' },
+    { name: 'Apply', text: 'Click Save Order. Processing is local.' },
+    { name: 'Download', text: 'Download the reordered PDF.' },
+  ],
+  delete: [
+    { name: 'Upload your PDF', text: 'Drop or select the PDF with pages to remove.' },
+    { name: 'Select pages to delete', text: 'Click the thumbnails of pages you want to remove.' },
+    { name: 'Delete', text: 'Click Delete Pages. Processing is local.' },
+    { name: 'Download', text: 'Download the PDF with those pages removed.' },
+  ],
+  extract: [
+    { name: 'Upload your PDF', text: 'Drop or select the PDF with pages to extract.' },
+    { name: 'Select pages', text: 'Click the thumbnails of pages you want to keep.' },
+    { name: 'Extract', text: 'Click Extract Pages. Processing is local.' },
+    { name: 'Download', text: 'Download the new PDF containing only those pages.' },
+  ],
+  compress: [
+    { name: 'Upload your PDF', text: 'Drop or select the PDF you want to compress.' },
+    { name: 'Set target size', text: 'Choose a preset size or type a custom target in KB or MB.' },
+    { name: 'Compress', text: 'Click Compress. The tool iterates JPEG quality until the file hits your target.' },
+    { name: 'Download', text: 'Download the compressed PDF.' },
+  ],
+  'jpg-to-pdf': [
+    { name: 'Select images', text: 'Drop or select JPG, PNG, or WebP images to convert.' },
+    { name: 'Arrange order', text: 'Drag images into the page order you want.' },
+    { name: 'Convert', text: 'Click Convert to PDF. Each image becomes one page.' },
+    { name: 'Download', text: 'Download the PDF.' },
+  ],
+  'pdf-to-jpg': [
+    { name: 'Upload your PDF', text: 'Drop or select the PDF to convert to images.' },
+    { name: 'Convert', text: 'Click Convert. Each page renders to a JPEG image at 2× resolution.' },
+    { name: 'Download', text: 'Download the ZIP of JPEG images.' },
+  ],
+  ocr: [
+    { name: 'Upload your PDF', text: 'Drop or select a scanned or image-based PDF.' },
+    { name: 'Select language', text: 'Choose the language of the text (English by default).' },
+    { name: 'Run OCR', text: 'Click Run OCR. Tesseract.js reads the text from each page.' },
+    { name: 'Copy or download', text: 'Copy the extracted text or download it as a .txt file.' },
+  ],
+  unlock: [
+    { name: 'Upload your PDF', text: 'Drop or select the password-protected PDF.' },
+    { name: 'Enter password', text: 'Type the PDF password. It never leaves your device.' },
+    { name: 'Remove password', text: 'Click Remove Password. The PDF is decrypted locally.' },
+    { name: 'Download', text: 'Download the unlocked PDF.' },
+  ],
+};
+
+const steps = STEPS[tool] ?? STEPS.compress;
+
+const data = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name,
+  image: `${siteUrl}/icons/icon-512.png`,
+  step: steps.map((s, i) => ({
+    '@type': 'HowToStep',
+    position: i + 1,
+    name: s.name,
+    text: s.text,
+  })),
+};
+---
+<JsonLd {data} />

@@ -1,0 +1,37 @@
+---
+h1: "Compress PDF Without Uploading"
+metaTitle: "Compress PDF Without Uploading — Files Stay on Device"
+metaDescription: "Compress PDFs entirely in your browser using WebAssembly. Files never leave your device. Safe for Aadhaar cards, salary slips, and bank statements."
+tool: compress
+intentTag: quality
+relatedSlugs:
+  - "compress-pdf"
+  - "compress-pdf-without-watermark"
+  - "merge-pdf-online-free-no-signup"
+  - "compress-pdf-in-browser"
+faq:
+  - q: "How can a browser compress a PDF without uploading it?"
+    a: "WebAssembly (WASM) allows compiled C/C++ code — in this case a PDF processing library — to run inside the browser at near-native speed. The file is read from your disk into browser memory, processed there, and the output is written back to your disk. No network request is made."
+  - q: "Is it safe to compress Aadhaar cards or PAN cards using this tool?"
+    a: "Yes. Because no upload occurs, your identity documents never leave your device. They are processed entirely within the browser's sandboxed memory, which is more secure than sending the file to a third-party server."
+  - q: "Does Smallpdf upload my files to their servers?"
+    a: "Yes. Smallpdf and iLovePDF are server-side tools. Your PDF is transmitted over HTTPS to their infrastructure, processed there, and temporarily stored before deletion. They publish data-retention policies, but the file does leave your device."
+  - q: "What browsers support this no-upload compression?"
+    a: "All modern browsers: Chrome 80+, Firefox 79+, Safari 15+, Edge 80+, and Samsung Internet 13+. WebAssembly has broad support and no special settings are required."
+  - q: "Does offline use work too?"
+    a: "After your first visit, the tool's service worker caches the WASM binary and app files. Subsequent use works without an internet connection, making it fully offline-capable."
+---
+
+Compress PDF Without Uploading is the privacy-first approach to document compression — one where your files never leave your device because the compression engine runs entirely inside your browser.
+
+Most online PDF tools are server-side: you select a file, it uploads to a data centre, gets processed, and you download the result. This works, but it means your document passes through infrastructure you do not control. For routine documents this is acceptable. For sensitive personal files, it is an unnecessary exposure.
+
+Consider the documents people compress most often before uploading to government portals: Aadhaar cards, PAN cards, salary slips, income tax returns, caste certificates, bank statements. These contain account numbers, PAN numbers, full legal names, and addresses — exactly the data identity thieves target.
+
+PDF Toolkit uses WebAssembly to run the compression algorithm locally. When you select a PDF, the file is read into your browser's sandboxed memory, the WASM module processes it there, and the compressed file is written back to your Downloads folder. No network request carries your document.
+
+This is categorically different from "encrypted upload" — even encrypted in transit, your file still reaches a server. No-upload means no server involvement whatsoever.
+
+Client-side compression is now as fast as server-side for most files. A 4 MB PDF compresses in under five seconds on a typical laptop, with no round-trip delay.
+
+Compared to Smallpdf and iLovePDF, PDF Toolkit does not offer PDF-to-Word conversion or e-signature. If you need those, those tools are reasonable. If your priority is keeping Aadhaar cards, salary slips, and bank statements on your own device, PDF Toolkit is the right choice.
