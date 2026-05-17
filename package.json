@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "start": "npx serve dist --listen $PORT",
     "astro": "astro"
   },
   "dependencies": {
