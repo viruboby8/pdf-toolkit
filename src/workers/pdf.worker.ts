@@ -1,9 +1,12 @@
 import * as Comlink from 'comlink';
-import { PDFDocument, degrees } from 'pdf-lib';
+import { PDFDocument, PDFName, PDFRawStream, degrees } from 'pdf-lib';
 import * as pdfjs from 'pdfjs-dist';
 import { zipSync } from 'fflate';
 import * as opfs from '@/lib/opfs';
 import type { PdfApi, ProgressFn, Handle } from '@/lib/pdf/types';
+import type { CompressOpts, CompressResponse } from '@/lib/pdf/compress-types';
+import { jpegEncode, jpegDecode } from './codecs/mozjpeg';
+import { clampLongestSide } from './codecs/resize';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -143,6 +146,83 @@ const api: PdfApi = {
     const name = `${uuid()}.pdf`;
     await opfs.writeBytes(name, await dst.save());
     return name;
+  },
+
+  async compress(h: Handle, opts: CompressOpts, onProgress: ProgressFn): Promise<CompressResponse> {
+    const f = await opfs.readFile(h);
+    const originalBytes = f.size;
+    const inputBytes = new Uint8Array(await f.arrayBuffer());
+
+    const Q_MAP = {
+      low:    { q: 40, maxSide: 1200 as number | null },
+      medium: { q: 70, maxSide: 1800 as number | null },
+      high:   { q: 85, maxSide: null as number | null },
+    };
+
+    async function recompressImages(bytes: Uint8Array, q: number, maxSide: number | null): Promise<Uint8Array> {
+      const doc = await PDFDocument.load(bytes, { ignoreEncryption: true });
+      const objs = doc.context.enumerateIndirectObjects();
+      for (const [, obj] of objs) {
+        if (!(obj instanceof PDFRawStream)) continue;
+        const dict = obj.dict;
+        if (dict.get(PDFName.of('Subtype'))?.toString() !== '/Image') continue;
+        if (dict.get(PDFName.of('Filter'))?.toString() !== '/DCTDecode') continue;
+        const orig = obj.contents as Uint8Array;
+        try {
+          let img = await jpegDecode(orig);
+          if (maxSide) img = await clampLongestSide(img, maxSide);
+          const re = await jpegEncode(img, q);
+          if (re.byteLength < orig.byteLength) {
+            (obj as unknown as { contents: Uint8Array }).contents = re;
+            dict.set(PDFName.of('Width'), doc.context.obj(img.width));
+            dict.set(PDFName.of('Height'), doc.context.obj(img.height));
+            dict.set(PDFName.of('Length'), doc.context.obj(re.byteLength));
+          }
+        } catch { /* skip unencodable images */ }
+      }
+      return new Uint8Array(await doc.save({ useObjectStreams: true }));
+    }
+
+    let out: Uint8Array;
+    let attemptsUsed = 0;
+    const fellBackToGs = false;
+
+    if (opts.mode === 'quality') {
+      const { q, maxSide } = Q_MAP[opts.quality];
+      onProgress(0, 1, 'Compressing images…');
+      out = await recompressImages(inputBytes, q, maxSide);
+      attemptsUsed = 1;
+    } else {
+      const target = opts.targetBytes;
+      let lo = 10, hi = 85, best: Uint8Array | null = null;
+      while (lo <= hi && attemptsUsed < 6) {
+        const mid = Math.floor((lo + hi) / 2);
+        onProgress(attemptsUsed + 1, 6, `Searching quality ${mid}…`);
+        const candidate = await recompressImages(inputBytes, mid, 1500);
+        attemptsUsed++;
+        if (candidate.byteLength <= target) {
+          best = candidate;
+          lo = mid + 1;
+        } else {
+          hi = mid - 1;
+        }
+      }
+      // If we never hit the target, use the smallest we found (quality 10, aggressive clamp)
+      out = best ?? await recompressImages(inputBytes, 10, 800);
+    }
+
+    const outName = `${uuid()}.pdf`;
+    await opfs.writeBytes(outName, out);
+    return {
+      handle: outName,
+      result: {
+        originalBytes,
+        compressedBytes: out.byteLength,
+        percentSaved: Math.max(0, Math.round((1 - out.byteLength / originalBytes) * 100)),
+        attemptsUsed,
+        fellBackToGs,
+      },
+    };
   },
 
   async getResultBlob(h: Handle): Promise<Blob> {

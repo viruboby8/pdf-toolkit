@@ -1,0 +1,40 @@
+---
+import Base from '@/layouts/Base.astro';
+import CompressTool from '@/components/tools/CompressTool.svelte';
+---
+
+<Base
+  title="Compress PDF to 1 MB — Free, No Upload | PDF Toolkit"
+  description="Compress any PDF to under 1 MB in your browser. No upload, no watermark. Useful for email attachments, job portals, and banking KYC uploads."
+  canonical="/compress-pdf-to-1mb"
+>
+  <h1 class="text-3xl font-bold text-slate-900 mb-2">Compress PDF to under 1 MB</h1>
+  <p class="text-slate-500 mb-8">
+    Many job portals, banking KYC forms, and email providers suggest keeping attachments under 1 MB.
+    Drop your PDF, select the 1 MB preset, and download the result — no upload, no watermark.
+  </p>
+
+  <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+    <CompressTool client:visible presetTarget="1mb" />
+  </div>
+
+  <section class="mt-10 text-sm text-slate-600 space-y-2">
+    <p>→ Need a tighter limit? Try <a href="/compress-pdf-to-500kb" class="text-sky-600 hover:underline">500 KB</a> or <a href="/compress-pdf-to-200kb" class="text-sky-600 hover:underline">200 KB</a>. Need more room? Try <a href="/compress-pdf-to-2mb" class="text-sky-600 hover:underline">2 MB</a>.</p>
+  </section>
+
+  <section class="mt-8 space-y-3 text-sm text-slate-600">
+    <h2 class="text-lg font-semibold text-slate-800">Frequently asked questions</h2>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Is 1 MB a common upload limit?</summary>
+      <p class="px-4 pb-4 pt-2">Yes — it's the default cap for many HR portals (Naukri, LinkedIn job applications), most bank account opening forms, and the Passport Seva online portal.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Will a large multi-page PDF fit in 1 MB?</summary>
+      <p class="px-4 pb-4 pt-2">Usually yes for documents under ~20 scanned pages. Longer documents may need the 2 MB target instead, or try splitting the PDF first.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">How is this different from just printing to PDF?</summary>
+      <p class="px-4 pb-4 pt-2">"Print to PDF" re-renders the document, which can change fonts and lose vector graphics. This tool directly re-encodes the embedded images in the existing PDF without re-rendering, preserving the original layout.</p>
+    </details>
+  </section>
+</Base>

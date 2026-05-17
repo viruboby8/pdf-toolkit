@@ -1,0 +1,40 @@
+---
+import Base from '@/layouts/Base.astro';
+import CompressTool from '@/components/tools/CompressTool.svelte';
+---
+
+<Base
+  title="Compress PDF — Free, No Upload | PDF Toolkit"
+  description="Reduce PDF file size in your browser. Quality presets or exact size targets (100 KB, 200 KB, 500 KB). No upload, no watermark, no limits."
+  canonical="/compress-pdf"
+>
+  <h1 class="text-3xl font-bold text-slate-900 mb-2">Compress PDF</h1>
+  <p class="text-slate-500 mb-8">
+    Reduce your PDF file size using quality presets or hit an exact target size — perfect for government portals and email attachments.
+    Runs entirely in your browser. Your file never leaves your device.
+  </p>
+
+  <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+    <CompressTool client:visible />
+  </div>
+
+  <section class="mt-12 space-y-3 text-sm text-slate-600">
+    <h2 class="text-lg font-semibold text-slate-800">Frequently asked questions</h2>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Are my files uploaded to a server?</summary>
+      <p class="px-4 pb-4 pt-2">No. All compression runs locally in your browser using WebAssembly. Zero network calls are made during the operation — you can verify this in DevTools → Network.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">How does the size-target mode work?</summary>
+      <p class="px-4 pb-4 pt-2">The tool uses a binary search over JPEG quality levels — it re-encodes the images inside your PDF at progressively lower quality until the output fits under the target. Up to 6 attempts are made.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">What if my PDF doesn't reach the target size?</summary>
+      <p class="px-4 pb-4 pt-2">Text-heavy or vector PDFs have a compression floor — their size is determined by fonts and structure, not images. In that case we return the smallest file we could produce and tell you the actual size.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Which quality preset should I choose?</summary>
+      <p class="px-4 pb-4 pt-2">Use <strong>Low</strong> for scanned documents you just need to submit. Use <strong>Medium</strong> for a balance of size and readability. Use <strong>High</strong> when visual quality matters — it still compresses noticeably for image-heavy PDFs.</p>
+    </details>
+  </section>
+</Base>

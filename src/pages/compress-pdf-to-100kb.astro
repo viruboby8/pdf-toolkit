@@ -1,0 +1,40 @@
+---
+import Base from '@/layouts/Base.astro';
+import CompressTool from '@/components/tools/CompressTool.svelte';
+---
+
+<Base
+  title="Compress PDF to 100 KB — Free, No Upload | PDF Toolkit"
+  description="Compress any PDF to under 100 KB in your browser. Perfect for Aadhaar updates, driving licence portals, and college admission forms that cap uploads at 100 KB."
+  canonical="/compress-pdf-to-100kb"
+>
+  <h1 class="text-3xl font-bold text-slate-900 mb-2">Compress PDF to under 100 KB</h1>
+  <p class="text-slate-500 mb-8">
+    Many Aadhaar update portals, state-government forms, and college admission sites cap document uploads at 100 KB.
+    This tool re-encodes images inside your PDF to hit exactly that target — entirely in your browser, no upload required.
+  </p>
+
+  <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+    <CompressTool client:visible presetTarget="100kb" />
+  </div>
+
+  <section class="mt-10 text-sm text-slate-600 space-y-2">
+    <p>→ Need a larger target? Try <a href="/compress-pdf-to-200kb" class="text-sky-600 hover:underline">200 KB</a>, <a href="/compress-pdf-to-500kb" class="text-sky-600 hover:underline">500 KB</a>, or <a href="/compress-pdf-to-1mb" class="text-sky-600 hover:underline">1 MB</a>.</p>
+  </section>
+
+  <section class="mt-8 space-y-3 text-sm text-slate-600">
+    <h2 class="text-lg font-semibold text-slate-800">Frequently asked questions</h2>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Which portals require PDFs under 100 KB?</summary>
+      <p class="px-4 pb-4 pt-2">Common ones include DigiLocker document uploads, some NIOS and state board forms, and various Aadhaar-linked service portals. Always check the portal's file-size note before uploading.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Will quality be acceptable at 100 KB?</summary>
+      <p class="px-4 pb-4 pt-2">For scanned identity documents (Aadhaar, mark sheets, certificates) at standard scan quality, text remains legible. The tool picks the highest quality that fits within 100 KB.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Is my file uploaded anywhere?</summary>
+      <p class="px-4 pb-4 pt-2">No. Everything runs on your device using WebAssembly. No data is sent to any server.</p>
+    </details>
+  </section>
+</Base>

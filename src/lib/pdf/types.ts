@@ -1,4 +1,5 @@
 import type { Remote } from 'comlink';
+import type { CompressOpts, CompressResponse } from './compress-types';
 
 export type ProgressFn = (current: number, total: number, label?: string) => void;
 export type Handle = string;
@@ -13,6 +14,7 @@ export interface PdfApi {
   reorder(h: Handle, newOrder: number[], onProgress: ProgressFn): Promise<Handle>;
   deletePages(h: Handle, pages: number[], onProgress: ProgressFn): Promise<Handle>;
   extractPages(h: Handle, pages: number[], onProgress: ProgressFn): Promise<Handle>;
+  compress(h: Handle, opts: CompressOpts, onProgress: ProgressFn): Promise<CompressResponse>;
   getResultBlob(h: Handle): Promise<Blob>;
   cleanup(h: Handle): Promise<void>;
   cleanupAll(): Promise<void>;

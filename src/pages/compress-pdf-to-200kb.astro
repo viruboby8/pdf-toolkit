@@ -1,0 +1,40 @@
+---
+import Base from '@/layouts/Base.astro';
+import CompressTool from '@/components/tools/CompressTool.svelte';
+---
+
+<Base
+  title="Compress PDF to 200 KB — Free, No Upload | PDF Toolkit"
+  description="Compress any PDF to under 200 KB in your browser. Required for SSC CGL, Railway RRB, and many state government job application portals."
+  canonical="/compress-pdf-to-200kb"
+>
+  <h1 class="text-3xl font-bold text-slate-900 mb-2">Compress PDF to under 200 KB</h1>
+  <p class="text-slate-500 mb-8">
+    SSC CGL, Railway RRB, and most state government job application portals cap PDF uploads at 200 KB.
+    This tool uses iterative image re-encoding to hit that exact target — no upload, no watermark, no limits.
+  </p>
+
+  <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+    <CompressTool client:visible presetTarget="200kb" />
+  </div>
+
+  <section class="mt-10 text-sm text-slate-600 space-y-2">
+    <p>→ Need a different target? Try <a href="/compress-pdf-to-100kb" class="text-sky-600 hover:underline">100 KB</a>, <a href="/compress-pdf-to-500kb" class="text-sky-600 hover:underline">500 KB</a>, or <a href="/compress-pdf-to-1mb" class="text-sky-600 hover:underline">1 MB</a>.</p>
+  </section>
+
+  <section class="mt-8 space-y-3 text-sm text-slate-600">
+    <h2 class="text-lg font-semibold text-slate-800">Frequently asked questions</h2>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Which exams require PDFs under 200 KB?</summary>
+      <p class="px-4 pb-4 pt-2">SSC CGL, SSC CHSL, Railway RRB NTPC/Group D, IBPS PO/Clerk, SBI PO, and most state PSC exams require certificate and photo uploads under 200 KB. Always check the specific notification.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">How many attempts does the tool make?</summary>
+      <p class="px-4 pb-4 pt-2">Up to 6 iterations using binary search over JPEG quality. Progress is shown in real time so you can see it working.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Is my Aadhaar / PAN / certificate safe?</summary>
+      <p class="px-4 pb-4 pt-2">Yes. Processing runs entirely on your device — no file data is ever transmitted to a server. You can verify this by opening DevTools → Network while the tool runs.</p>
+    </details>
+  </section>
+</Base>

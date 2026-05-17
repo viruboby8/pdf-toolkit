@@ -1,0 +1,40 @@
+---
+import Base from '@/layouts/Base.astro';
+import CompressTool from '@/components/tools/CompressTool.svelte';
+---
+
+<Base
+  title="Compress PDF to 2 MB — Free, No Upload | PDF Toolkit"
+  description="Compress any PDF to under 2 MB in your browser. Free, no upload, no watermark. Ideal for WhatsApp sharing, large form submissions, and email with size limits."
+  canonical="/compress-pdf-to-2mb"
+>
+  <h1 class="text-3xl font-bold text-slate-900 mb-2">Compress PDF to under 2 MB</h1>
+  <p class="text-slate-500 mb-8">
+    WhatsApp's file-sharing limit, many college application portals, and some government forms cap PDFs at 2 MB.
+    Compress your PDF to fit — instantly, in your browser, with no upload.
+  </p>
+
+  <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+    <CompressTool client:visible presetTarget="2mb" />
+  </div>
+
+  <section class="mt-10 text-sm text-slate-600 space-y-2">
+    <p>→ Need a tighter limit? Try <a href="/compress-pdf-to-1mb" class="text-sky-600 hover:underline">1 MB</a>, <a href="/compress-pdf-to-500kb" class="text-sky-600 hover:underline">500 KB</a>, or <a href="/compress-pdf-to-200kb" class="text-sky-600 hover:underline">200 KB</a>.</p>
+  </section>
+
+  <section class="mt-8 space-y-3 text-sm text-slate-600">
+    <h2 class="text-lg font-semibold text-slate-800">Frequently asked questions</h2>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Why does WhatsApp have a PDF size limit?</summary>
+      <p class="px-4 pb-4 pt-2">WhatsApp limits file sharing to 100 MB overall, but many recipients' devices reject large PDFs in chats. Keeping a PDF under 2 MB ensures it opens quickly on low-end Android phones common in India.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Will my PDF quality be acceptable at 2 MB?</summary>
+      <p class="px-4 pb-4 pt-2">At 2 MB there's usually very little quality loss. The tool picks the highest JPEG quality that fits within the limit — often quality 80+.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Are there any limits on how many PDFs I can compress?</summary>
+      <p class="px-4 pb-4 pt-2">No. Process as many files as you need — there are no daily caps, no session limits, no login required. Each compression runs on your own CPU at zero cost to us.</p>
+    </details>
+  </section>
+</Base>

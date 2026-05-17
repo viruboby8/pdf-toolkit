@@ -1,0 +1,40 @@
+---
+import Base from '@/layouts/Base.astro';
+import CompressTool from '@/components/tools/CompressTool.svelte';
+---
+
+<Base
+  title="Compress PDF to 500 KB — Free, No Upload | PDF Toolkit"
+  description="Compress any PDF to under 500 KB online for free. Ideal for UPSC DAF, visa applications, and university admission portals that cap uploads at 500 KB."
+  canonical="/compress-pdf-to-500kb"
+>
+  <h1 class="text-3xl font-bold text-slate-900 mb-2">Compress PDF to under 500 KB</h1>
+  <p class="text-slate-500 mb-8">
+    UPSC DAF (Detailed Application Form), many visa applications, and university admission portals cap each document at 500 KB.
+    Compress your PDF to fit — entirely in your browser, zero uploads.
+  </p>
+
+  <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+    <CompressTool client:visible presetTarget="500kb" />
+  </div>
+
+  <section class="mt-10 text-sm text-slate-600 space-y-2">
+    <p>→ Need a tighter limit? Try <a href="/compress-pdf-to-200kb" class="text-sky-600 hover:underline">200 KB</a> or <a href="/compress-pdf-to-100kb" class="text-sky-600 hover:underline">100 KB</a>. Need more room? Try <a href="/compress-pdf-to-1mb" class="text-sky-600 hover:underline">1 MB</a>.</p>
+  </section>
+
+  <section class="mt-8 space-y-3 text-sm text-slate-600">
+    <h2 class="text-lg font-semibold text-slate-800">Frequently asked questions</h2>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Does UPSC really require files under 500 KB?</summary>
+      <p class="px-4 pb-4 pt-2">Yes — the UPSC DAF requires each certificate upload to be under 500 KB in PDF format. Other UPSC forms (CSP, ESE, CDS) have similar caps. Always check the current year's instruction booklet.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Will my documents remain legible?</summary>
+      <p class="px-4 pb-4 pt-2">For most scanned certificates and mark sheets, 500 KB is generous — the tool will find a quality level that keeps text sharp while fitting the limit.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Is this tool free?</summary>
+      <p class="px-4 pb-4 pt-2">Completely free, no daily limits, no signup, no watermarks. Processing runs on your CPU — we have zero operating cost for each compression.</p>
+    </details>
+  </section>
+</Base>
