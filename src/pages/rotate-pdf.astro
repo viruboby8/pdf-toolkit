@@ -1,0 +1,63 @@
+---
+import Base from '@/layouts/Base.astro';
+import RotateTool from '@/components/tools/RotateTool.svelte';
+---
+
+<Base
+  title="Rotate PDF — Free, No Upload, 100% In Your Browser | PDF Toolkit"
+  description="Rotate all pages of a PDF by 90°, 180°, or 270°. No upload, no signup, no watermark. Works offline."
+  canonical="/rotate-pdf"
+>
+  <h1 class="text-3xl font-bold text-slate-900 mb-2">Rotate PDF pages online</h1>
+  <p class="text-slate-500 mb-8">
+    Rotate all pages of your PDF by 90°, 180°, or 270° — entirely in your browser.
+    Files never leave your device. No upload, no limits.
+  </p>
+
+  <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+    <RotateTool client:visible />
+  </div>
+
+  <section class="mt-12 space-y-6 text-sm text-slate-600">
+    <h2 class="text-lg font-semibold text-slate-800">Frequently asked questions</h2>
+
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">
+        Are my files uploaded to a server?
+      </summary>
+      <p class="px-4 pb-4 pt-2">
+        No. Rotation runs entirely in your browser using WebAssembly. Open DevTools → Network to verify zero outbound calls.
+      </p>
+    </details>
+
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">
+        Can I rotate individual pages instead of all pages?
+      </summary>
+      <p class="px-4 pb-4 pt-2">
+        Per-page rotation is coming in Phase 2 with a visual thumbnail picker.
+        Currently all pages are rotated by the selected angle.
+      </p>
+    </details>
+
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">
+        Will rotation affect the quality of my PDF?
+      </summary>
+      <p class="px-4 pb-4 pt-2">
+        No. Rotation only changes the page orientation metadata — it does not re-render or recompress any content.
+        The output is identical in quality to the input.
+      </p>
+    </details>
+
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">
+        What if my PDF is password-protected?
+      </summary>
+      <p class="px-4 pb-4 pt-2">
+        The tool will attempt to open encrypted files in read-only mode.
+        Full password handling (add/remove passwords) is coming in a future update.
+      </p>
+    </details>
+  </section>
+</Base>

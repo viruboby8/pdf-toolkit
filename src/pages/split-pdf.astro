@@ -1,0 +1,62 @@
+---
+import Base from '@/layouts/Base.astro';
+import SplitTool from '@/components/tools/SplitTool.svelte';
+---
+
+<Base
+  title="Split PDF — Free, No Upload, 100% In Your Browser | PDF Toolkit"
+  description="Split a PDF by every N pages or extract a specific page range. No upload, no signup, no daily limits. Works offline."
+  canonical="/split-pdf"
+>
+  <h1 class="text-3xl font-bold text-slate-900 mb-2">Split PDF online</h1>
+  <p class="text-slate-500 mb-8">
+    Split a PDF into individual parts by every N pages or by a specific page range —
+    entirely in your browser. Files never leave your device.
+  </p>
+
+  <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+    <SplitTool client:visible />
+  </div>
+
+  <section class="mt-12 space-y-6 text-sm text-slate-600">
+    <h2 class="text-lg font-semibold text-slate-800">Frequently asked questions</h2>
+
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">
+        Are my files uploaded to a server?
+      </summary>
+      <p class="px-4 pb-4 pt-2">
+        No. PDF splitting runs entirely in your browser. Open DevTools → Network to confirm zero outbound requests during processing.
+      </p>
+    </details>
+
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">
+        What happens when I split into multiple parts?
+      </summary>
+      <p class="px-4 pb-4 pt-2">
+        When splitting into 2 or more parts, the output is downloaded as a ZIP file containing each part as a separate PDF.
+        A single-part extract downloads directly as a PDF.
+      </p>
+    </details>
+
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">
+        How do I extract just one page?
+      </summary>
+      <p class="px-4 pb-4 pt-2">
+        Use "Page range" mode and enter the same page number for both start and end (e.g., page 5 to page 5).
+      </p>
+    </details>
+
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">
+        Is there a file size limit?
+      </summary>
+      <p class="px-4 pb-4 pt-2">
+        No enforced limit. The practical limit is your device's available memory.
+        We've tested with 300 MB PDFs on standard hardware without issues.
+      </p>
+    </details>
+  </section>
+</Base>

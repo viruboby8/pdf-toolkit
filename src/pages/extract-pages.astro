@@ -1,0 +1,40 @@
+---
+import Base from '@/layouts/Base.astro';
+import ExtractPagesTool from '@/components/tools/ExtractPagesTool.svelte';
+---
+
+<Base
+  title="Extract PDF Pages — Free, No Upload | PDF Toolkit"
+  description="Select specific pages from a PDF and save them as a new document. Visual thumbnail picker. No upload, no watermark."
+  canonical="/extract-pages"
+>
+  <h1 class="text-3xl font-bold text-slate-900 mb-2">Extract pages from PDF</h1>
+  <p class="text-slate-500 mb-8">
+    Select the pages you want to keep and download them as a new PDF.
+    Everything runs in your browser — your file never leaves your device.
+  </p>
+
+  <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+    <ExtractPagesTool client:visible />
+  </div>
+
+  <section class="mt-12 space-y-3 text-sm text-slate-600">
+    <h2 class="text-lg font-semibold text-slate-800">Frequently asked questions</h2>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Are my files uploaded?</summary>
+      <p class="px-4 pb-4 pt-2">No. All processing happens locally in your browser using WebAssembly. Zero network calls during operation.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">What is the difference between extract and split?</summary>
+      <p class="px-4 pb-4 pt-2">Split divides a PDF into sequential parts. Extract lets you hand-pick any combination of pages (e.g., pages 1, 5, and 9) and saves just those.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Will the extracted pages be in the order I selected them?</summary>
+      <p class="px-4 pb-4 pt-2">The output preserves the original document order of the selected pages, regardless of the order you clicked them.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Is there a page count limit?</summary>
+      <p class="px-4 pb-4 pt-2">No limit. Thumbnails render progressively for large PDFs so you can start selecting pages immediately.</p>
+    </details>
+  </section>
+</Base>

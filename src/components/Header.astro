@@ -1,0 +1,42 @@
+---
+const tools = [
+  { href: '/merge-pdf', label: 'Merge' },
+  { href: '/split-pdf', label: 'Split' },
+  { href: '/rotate-pdf', label: 'Rotate' },
+  { href: '/reorder-pdf', label: 'Reorder' },
+  { href: '/delete-pages', label: 'Delete pages' },
+  { href: '/extract-pages', label: 'Extract pages' },
+];
+
+const current = Astro.url.pathname;
+---
+
+<header class="bg-slate-900 text-white shadow-sm">
+  <div class="container mx-auto px-4 max-w-5xl flex items-center justify-between h-14 gap-4">
+    <a href="/" class="font-bold text-lg tracking-tight hover:text-sky-400 transition-colors shrink-0">
+      PDF Toolkit
+    </a>
+    <nav class="flex items-center gap-0.5 flex-wrap">
+      {tools.map(({ href, label }) => (
+        <a
+          href={href}
+          class={`px-2.5 py-1.5 rounded text-xs font-medium transition-colors whitespace-nowrap ${
+            current === href || current.startsWith(href + '/')
+              ? 'bg-sky-600 text-white'
+              : 'text-slate-300 hover:text-white hover:bg-slate-700'
+          }`}
+        >
+          {label}
+        </a>
+      ))}
+      <a
+        href="https://github.com/pdftoolkit"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="ml-1 px-2.5 py-1.5 rounded text-xs font-medium text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
+      >
+        GitHub ★
+      </a>
+    </nav>
+  </div>
+</header>

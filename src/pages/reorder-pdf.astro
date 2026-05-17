@@ -1,0 +1,40 @@
+---
+import Base from '@/layouts/Base.astro';
+import ReorderTool from '@/components/tools/ReorderTool.svelte';
+---
+
+<Base
+  title="Reorder PDF Pages — Free, No Upload | PDF Toolkit"
+  description="Drag and drop PDF pages into any order. Visual thumbnail grid. No upload, no signup, no daily limits. Works offline."
+  canonical="/reorder-pdf"
+>
+  <h1 class="text-3xl font-bold text-slate-900 mb-2">Reorder PDF pages</h1>
+  <p class="text-slate-500 mb-8">
+    Drop a PDF and drag its page thumbnails into any order — entirely in your browser.
+    Files never leave your device.
+  </p>
+
+  <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+    <ReorderTool client:visible />
+  </div>
+
+  <section class="mt-12 space-y-3 text-sm text-slate-600">
+    <h2 class="text-lg font-semibold text-slate-800">Frequently asked questions</h2>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Are my files uploaded?</summary>
+      <p class="px-4 pb-4 pt-2">No. All processing happens in a Web Worker in your browser via WebAssembly. Your file never leaves your device.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">How do I reorder pages?</summary>
+      <p class="px-4 pb-4 pt-2">Drop your PDF — thumbnails will render for every page. Then drag them into the order you want and click "Save Reordered PDF".</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Is there a page limit?</summary>
+      <p class="px-4 pb-4 pt-2">No enforced limit. Thumbnails render progressively — the first page appears within seconds even for large documents.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Does it work on mobile?</summary>
+      <p class="px-4 pb-4 pt-2">Yes — drag to reorder works on touch devices. Tap a page to select it.</p>
+    </details>
+  </section>
+</Base>

@@ -1,0 +1,29 @@
+{
+  "name": "03-pdf-toolkit",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.0",
+    "@astrojs/svelte": "^7.0.0",
+    "@tailwindcss/vite": "^4.3.0",
+    "@vite-pwa/astro": "^1.0.0",
+    "astro": "5.18.1",
+    "comlink": "^4.4.2",
+    "fflate": "^0.8.2",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^4.10.38",
+    "svelte": "^5.16.0",
+    "svelte-dnd-action": "^0.9.50",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.0"
+  }
+}

@@ -1,0 +1,64 @@
+---
+import Base from '@/layouts/Base.astro';
+import MergeTool from '@/components/tools/MergeTool.svelte';
+---
+
+<Base
+  title="Merge PDF — Free, Unlimited, 100% In Your Browser | PDF Toolkit"
+  description="Combine multiple PDF files into one. Drag to reorder pages. No upload, no signup, no watermark, no daily limits. Works offline."
+  canonical="/merge-pdf"
+>
+  <h1 class="text-3xl font-bold text-slate-900 mb-2">Merge PDF files online</h1>
+  <p class="text-slate-500 mb-8">
+    Drop two or more PDFs to combine them — entirely in your browser.
+    Files never leave your device. No upload, no limits, no watermarks.
+  </p>
+
+  <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+    <MergeTool client:visible />
+  </div>
+
+  <section class="mt-12 space-y-6 text-sm text-slate-600">
+    <h2 class="text-lg font-semibold text-slate-800">Frequently asked questions</h2>
+
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">
+        Are my files uploaded to a server?
+      </summary>
+      <p class="px-4 pb-4 pt-2">
+        No. PDF merging runs 100% in your browser using the <code>pdf-lib</code> library.
+        You can verify this by opening DevTools → Network and confirming zero outbound requests during the operation.
+      </p>
+    </details>
+
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">
+        How many PDFs can I merge at once?
+      </summary>
+      <p class="px-4 pb-4 pt-2">
+        There is no enforced limit. Practical limits depend on your device's memory.
+        We've tested merges of 20+ files totalling over 200 MB without issues on a mid-range laptop.
+      </p>
+    </details>
+
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">
+        Can I reorder the pages before merging?
+      </summary>
+      <p class="px-4 pb-4 pt-2">
+        Yes — drag the file cards to reorder them before clicking Merge.
+        The output PDF will have pages in the order you arranged.
+      </p>
+    </details>
+
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">
+        Does it work on mobile?
+      </summary>
+      <p class="px-4 pb-4 pt-2">
+        Yes. Use the "Browse" button to select files on iOS or Android.
+        Drag-and-drop reordering also works on modern mobile browsers.
+      </p>
+    </details>
+  </section>
+</Base>

@@ -1,0 +1,52 @@
+---
+import Base from '@/layouts/Base.astro';
+---
+
+<Base
+  title="Privacy Policy | PDF Toolkit"
+  description="PDF Toolkit privacy policy. Your files never leave your device — all processing happens locally in your browser."
+  canonical="/privacy"
+>
+  <div class="prose prose-slate max-w-none">
+    <h1>Privacy Policy</h1>
+    <p class="text-slate-500 text-sm">Last updated: May 2026</p>
+
+    <h2>The short version</h2>
+    <p>
+      <strong>No file you process ever leaves your device.</strong> PDF Toolkit runs entirely in your browser.
+      When you merge, split, or rotate a PDF, the operation runs on your CPU using WebAssembly.
+      Your files are never sent to any server — not even ours. You can verify this by opening your browser's
+      DevTools → Network tab and confirming zero outbound requests during any operation.
+    </p>
+
+    <h2>What we collect</h2>
+    <p>
+      We do not collect any personal data. We may use privacy-respecting analytics
+      (such as Plausible, which is cookie-free) to measure page visits in aggregate.
+      We never track individual users, collect IP addresses, or store any information about the files you process.
+    </p>
+
+    <h2>Cookies</h2>
+    <p>
+      We store a single <code>consent</code> key in <code>localStorage</code> to remember your cookie banner preference.
+      This is not a tracking cookie and is never sent to any server.
+    </p>
+    <p>
+      In the future, we may serve Google AdSense ads. If and when this happens, the cookie banner
+      will be updated to reflect AdSense's cookie usage, and you will be asked to consent before any
+      advertising cookies are set.
+    </p>
+
+    <h2>Third-party services</h2>
+    <p>
+      The app is hosted on Cloudflare Pages. Cloudflare may log standard web server access logs
+      (IP address, user agent, page visited) as part of their service. These logs are governed by
+      <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Cloudflare's privacy policy</a>.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Questions? Open an issue on our <a href="https://github.com/pdftoolkit" target="_blank" rel="noopener noreferrer">GitHub repository</a>.
+    </p>
+  </div>
+</Base>

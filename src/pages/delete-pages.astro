@@ -1,0 +1,40 @@
+---
+import Base from '@/layouts/Base.astro';
+import DeletePagesTool from '@/components/tools/DeletePagesTool.svelte';
+---
+
+<Base
+  title="Delete PDF Pages — Free, No Upload | PDF Toolkit"
+  description="Select and remove pages from a PDF using a visual thumbnail picker. No upload, no watermark, no limits."
+  canonical="/delete-pages"
+>
+  <h1 class="text-3xl font-bold text-slate-900 mb-2">Delete pages from PDF</h1>
+  <p class="text-slate-500 mb-8">
+    Click to select the pages you want to remove, then download the PDF without them.
+    Runs entirely in your browser — no upload required.
+  </p>
+
+  <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+    <DeletePagesTool client:visible />
+  </div>
+
+  <section class="mt-12 space-y-3 text-sm text-slate-600">
+    <h2 class="text-lg font-semibold text-slate-800">Frequently asked questions</h2>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Are my files uploaded?</summary>
+      <p class="px-4 pb-4 pt-2">No. All operations run in your browser. Nothing is sent to any server.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">How do I select multiple pages?</summary>
+      <p class="px-4 pb-4 pt-2">Click a page to select it. Shift-click to select a range. Ctrl/Cmd-click to toggle individual pages.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Can I delete all pages?</summary>
+      <p class="px-4 pb-4 pt-2">No — a PDF must have at least one page. The tool will prevent you from deleting every page.</p>
+    </details>
+    <details class="border border-slate-200 rounded-lg">
+      <summary class="px-4 py-3 font-medium text-slate-700 cursor-pointer hover:bg-slate-50">Is the operation reversible?</summary>
+      <p class="px-4 pb-4 pt-2">The tool only modifies the downloaded output — your original file is untouched. Keep the original if you need to undo.</p>
+    </details>
+  </section>
+</Base>
